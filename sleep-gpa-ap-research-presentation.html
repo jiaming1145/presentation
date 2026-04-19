@@ -1282,7 +1282,7 @@
       .slide-fit-target {
         --fit-scale: 1;
         transform: scale(var(--fit-scale));
-        transform-origin: center center;
+        transform-origin: top center;
         transition: transform 180ms var(--ease-slide);
       }
 
@@ -1316,6 +1316,130 @@
       #slide-12 .roadmap,
       #slide-13 .reflection-band {
         gap: clamp(0.5rem, 0.78vw, 0.66rem);
+      }
+
+      #slide-02 .slide-title {
+        font-size: clamp(1.45rem, 3.25vw, 3.05rem);
+        max-width: 14ch;
+      }
+
+      #slide-02 .question-text {
+        font-size: clamp(0.94rem, 1.62vw, 1.42rem);
+        max-width: 19ch;
+        line-height: 1.02;
+      }
+
+      #slide-02 .why-grid .metric-card strong {
+        font-size: clamp(0.78rem, 1.12vw, 1.18rem);
+        line-height: 0.96;
+      }
+
+      #slide-02 .why-grid .metric-card span {
+        font-size: clamp(0.62rem, 0.78vw, 0.74rem);
+        line-height: 1.18;
+      }
+
+      #slide-02 .why-grid .card-surface {
+        padding: clamp(0.68rem, 1vw, 0.86rem);
+      }
+
+      #slide-02 .layout-split {
+        gap: clamp(0.68rem, 1vw, 0.86rem);
+      }
+
+      #slide-02 .insight-list li {
+        font-size: clamp(0.76rem, 0.96vw, 0.88rem);
+        line-height: 1.28;
+      }
+
+      #slide-06 .slide-title {
+        font-size: clamp(1.38rem, 3.05vw, 2.85rem);
+        max-width: 14ch;
+      }
+
+      #slide-06 .process-card strong {
+        font-size: clamp(0.86rem, 1.26vw, 1.32rem);
+      }
+
+      #slide-06 .process-card p,
+      #slide-06 .method-note .body-copy {
+        font-size: clamp(0.66rem, 0.84vw, 0.76rem);
+        line-height: 1.22;
+      }
+
+      #slide-06 .warning,
+      #slide-06 .process-card,
+      #slide-06 .method-note .card-surface {
+        padding: clamp(0.68rem, 1vw, 0.86rem);
+      }
+
+      #slide-06 .process-grid {
+        gap: clamp(0.46rem, 0.68vw, 0.56rem);
+      }
+
+      #slide-09 .slide-title {
+        font-size: clamp(1.4rem, 3.12vw, 2.95rem);
+        max-width: 13ch;
+      }
+
+      #slide-09 .statement-card h3 {
+        font-size: clamp(1rem, 1.82vw, 1.72rem);
+      }
+
+      #slide-09 .stack {
+        gap: clamp(0.4rem, 0.64vw, 0.56rem);
+      }
+
+      #slide-09 .stack .metric-card {
+        padding: clamp(0.62rem, 0.92vw, 0.78rem);
+      }
+
+      #slide-09 .stack .metric-card strong {
+        font-size: clamp(0.8rem, 1.18vw, 1.14rem);
+        line-height: 0.98;
+      }
+
+      #slide-09 .stack .metric-card span {
+        font-size: clamp(0.58rem, 0.72vw, 0.68rem);
+        line-height: 1.15;
+      }
+
+      #slide-09 .statement-card .body-copy {
+        font-size: clamp(0.74rem, 0.92vw, 0.84rem);
+        line-height: 1.22;
+      }
+
+      #slide-12 .slide-title {
+        font-size: clamp(1.32rem, 2.86vw, 2.7rem);
+        max-width: 13ch;
+      }
+
+      #slide-12 .layout-split {
+        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+        gap: clamp(0.6rem, 0.8vw, 0.72rem);
+      }
+
+      #slide-12 .road-step {
+        padding: clamp(0.58rem, 0.88vw, 0.74rem);
+        gap: clamp(0.48rem, 0.72vw, 0.62rem);
+      }
+
+      #slide-12 .road-step p {
+        font-size: clamp(0.64rem, 0.84vw, 0.76rem);
+        line-height: 1.2;
+      }
+
+      #slide-12 .future-card {
+        padding: clamp(0.62rem, 0.92vw, 0.78rem);
+      }
+
+      #slide-12 .future-card strong {
+        font-size: clamp(0.82rem, 1.16vw, 1.12rem);
+      }
+
+      #slide-12 .future-card p {
+        font-size: clamp(0.58rem, 0.72vw, 0.68rem);
+        line-height: 1.16;
       }
 
       /* === RESPONSIVE ADJUSTMENTS === */
@@ -1544,8 +1668,7 @@
                     <span class="mini-label">Framing Statement</span>
                     <p class="question-text">
                       If the dataset records a full 24-hour routine, does sleep
-                      still predict academic performance once other uses of time
-                      are considered?
+                      still predict GPA once other uses of time are considered?
                     </p>
                   </div>
 
@@ -1832,7 +1955,7 @@
               <header class="slide-header">
                 <p class="eyebrow reveal delay-1">Methodology</p>
                 <h2 class="slide-title reveal delay-2" id="slide-06-title">
-                  Secondary quantitative analysis of one public dataset.
+                  Secondary analysis of one public dataset.
                 </h2>
               </header>
 
@@ -1864,8 +1987,8 @@
                   <div class="card-surface stack">
                     <span class="mini-label">Model Choice</span>
                     <p class="body-copy">
-                      Final model: GPA = b0 + b1(Sleep) + b2(Study) +
-                      b3(Extracurricular) + b4(Physical Activity) + e
+                      Final model: GPA = b0 + b1 Sleep + b2 Study +
+                      b3 Extracurricular + b4 Physical + e
                     </p>
                     <p class="body-copy muted">Significance level: alpha = .05</p>
                   </div>
@@ -2098,8 +2221,8 @@
               <header class="slide-header">
                 <p class="eyebrow reveal delay-1">Conclusion</p>
                 <h2 class="slide-title reveal delay-2" id="slide-09-title">
-                  Within this dataset, sleep duration did not meaningfully
-                  explain GPA.
+                  In this dataset, sleep duration did not meaningfully explain
+                  GPA.
                 </h2>
               </header>
 
@@ -2125,17 +2248,17 @@
                   <div class="metric-card card-surface">
                     <em>Hypothesis</em>
                     <strong>Not Supported</strong>
-                    <span>The observed file did not match the expected positive sleep pattern.</span>
+                    <span>The file did not match the expected positive sleep pattern.</span>
                   </div>
                   <div class="metric-card card-surface">
                     <em>Best Predictor</em>
                     <strong>Study Time</strong>
-                    <span>The strongest academic signal tracked hours allocated to studying.</span>
+                    <span>The strongest academic signal tracked hours spent studying.</span>
                   </div>
                   <div class="metric-card card-surface">
                     <em>Bounded Claim</em>
                     <strong>Context Matters</strong>
-                    <span>The result explains this structured dataset, not all students everywhere.</span>
+                    <span>The result explains this dataset, not all students everywhere.</span>
                   </div>
                 </div>
               </div>
@@ -2296,8 +2419,7 @@
               <header class="slide-header">
                 <p class="eyebrow reveal delay-1">Future Research</p>
                 <h2 class="slide-title reveal delay-2" id="slide-12-title">
-                  A stronger follow-up would improve both the data and the
-                  method.
+                  A stronger follow-up would improve both the data and method.
                 </h2>
               </header>
 
@@ -2305,11 +2427,11 @@
                 <div class="roadmap reveal delay-3">
                   <div class="road-step">
                     <div class="road-index">01</div>
-                    <p>Use datasets with documented instruments, clearer sampling, and stronger provenance.</p>
+                    <p>Use datasets with documented instruments and clearer sampling.</p>
                   </div>
                   <div class="road-step">
                     <div class="road-index">02</div>
-                    <p>Add richer sleep measures, especially quality, consistency, and timing.</p>
+                    <p>Add richer sleep measures: quality, consistency, and timing.</p>
                   </div>
                   <div class="road-step">
                     <div class="road-index">03</div>
@@ -2317,7 +2439,7 @@
                   </div>
                   <div class="road-step">
                     <div class="road-index">04</div>
-                    <p>Apply compositional-data methods to time-use variables constrained to a fixed day.</p>
+                    <p>Apply compositional-data methods to fixed daily time-use variables.</p>
                   </div>
                 </div>
 
@@ -2566,8 +2688,24 @@
           const availableHeight = content.clientHeight;
           if (!availableWidth || !availableHeight) return;
 
-          const neededWidth = Math.max(target.scrollWidth, target.offsetWidth);
-          const neededHeight = Math.max(target.scrollHeight, target.offsetHeight);
+          const targetRect = target.getBoundingClientRect();
+          let minLeft = targetRect.left;
+          let maxRight = targetRect.right;
+          let minTop = targetRect.top;
+          let maxBottom = targetRect.bottom;
+
+          const descendants = Array.from(target.querySelectorAll("*"));
+          descendants.forEach((node) => {
+            const rect = node.getBoundingClientRect();
+            if (rect.width === 0 && rect.height === 0) return;
+            minLeft = Math.min(minLeft, rect.left);
+            maxRight = Math.max(maxRight, rect.right);
+            minTop = Math.min(minTop, rect.top);
+            maxBottom = Math.max(maxBottom, rect.bottom);
+          });
+
+          const neededWidth = Math.max(targetRect.width, maxRight - minLeft);
+          const neededHeight = Math.max(targetRect.height, maxBottom - minTop);
           if (!neededWidth || !neededHeight) return;
 
           const scale = Math.min(
