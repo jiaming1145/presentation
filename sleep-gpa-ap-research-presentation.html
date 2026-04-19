@@ -1,0 +1,2514 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AP Research Presentation - Sleep Duration and GPA</title>
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* === THEME TOKENS === */
+      :root {
+        --paper: #f4efe6;
+        --paper-soft: #ece4d7;
+        --paper-line: rgba(26, 29, 36, 0.1);
+        --ink: #111724;
+        --ink-soft: #1b2434;
+        --ink-muted: #5f6673;
+        --sky: #5b7cff;
+        --sky-soft: rgba(91, 124, 255, 0.18);
+        --mint: #78c7b0;
+        --mint-soft: rgba(120, 199, 176, 0.18);
+        --cinnabar: #c9553d;
+        --cinnabar-soft: rgba(201, 85, 61, 0.16);
+        --glow: rgba(120, 199, 176, 0.24);
+        --font-display: "Fraunces", serif;
+        --font-body: "Manrope", sans-serif;
+        --font-mono: "IBM Plex Mono", monospace;
+        --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+        --ease-slide: cubic-bezier(0.22, 1, 0.36, 1);
+        --shadow-soft: 0 24px 80px rgba(10, 14, 22, 0.12);
+        --shadow-deep: 0 28px 80px rgba(5, 10, 18, 0.36);
+      }
+
+      /* === RESET === */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      /* ===========================================
+         VIEWPORT FITTING: MANDATORY BASE STYLES
+         Include this ENTIRE file in every presentation.
+         These styles ensure slides fit exactly in the viewport.
+         =========================================== */
+
+      /* 1. Lock html/body to viewport */
+      html,
+      body {
+        height: 100%;
+        overflow-x: hidden;
+      }
+
+      html {
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+      }
+
+      /* 2. Each slide = exact viewport height */
+      .slide {
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh; /* Dynamic viewport height for mobile browsers */
+        overflow: hidden; /* CRITICAL: Prevent ANY overflow */
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+      }
+
+      /* 3. Content container with flex for centering */
+      .slide-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        max-height: 100%;
+        overflow: hidden; /* Double-protection against overflow */
+        padding: var(--slide-padding);
+      }
+
+      /* 4. ALL typography uses clamp() for responsive scaling */
+      :root {
+        /* Titles scale from mobile to desktop */
+        --title-size: clamp(1.5rem, 5vw, 4rem);
+        --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
+        --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+
+        /* Body text */
+        --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
+        --small-size: clamp(0.65rem, 1vw, 0.875rem);
+
+        /* Spacing scales with viewport */
+        --slide-padding: clamp(1rem, 4vw, 4rem);
+        --content-gap: clamp(0.5rem, 2vw, 2rem);
+        --element-gap: clamp(0.25rem, 1vw, 1rem);
+      }
+
+      /* 5. Cards/containers use viewport-relative max sizes */
+      .card,
+      .container,
+      .content-box {
+        max-width: min(90vw, 1000px);
+        max-height: min(80vh, 700px);
+      }
+
+      /* 6. Lists auto-scale with viewport */
+      .feature-list,
+      .bullet-list {
+        gap: clamp(0.4rem, 1vh, 1rem);
+      }
+
+      .feature-list li,
+      .bullet-list li {
+        font-size: var(--body-size);
+        line-height: 1.4;
+      }
+
+      /* 7. Grids adapt to available space */
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+        gap: clamp(0.5rem, 1.5vw, 1rem);
+      }
+
+      /* 8. Images constrained to viewport */
+      img,
+      .image-container {
+        max-width: 100%;
+        max-height: min(50vh, 400px);
+        object-fit: contain;
+      }
+
+      /* ===========================================
+         RESPONSIVE BREAKPOINTS
+         Aggressive scaling for smaller viewports
+         =========================================== */
+
+      /* Short viewports (< 700px height) */
+      @media (max-height: 700px) {
+        :root {
+          --slide-padding: clamp(0.75rem, 3vw, 2rem);
+          --content-gap: clamp(0.4rem, 1.5vw, 1rem);
+          --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
+          --h2-size: clamp(1rem, 3vw, 1.75rem);
+        }
+      }
+
+      /* Very short viewports (< 600px height) */
+      @media (max-height: 600px) {
+        :root {
+          --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
+          --content-gap: clamp(0.3rem, 1vw, 0.75rem);
+          --title-size: clamp(1.1rem, 4vw, 2rem);
+          --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+        }
+
+        /* Hide non-essential elements */
+        .nav-dots,
+        .keyboard-hint,
+        .decorative {
+          display: none;
+        }
+      }
+
+      /* Extremely short (landscape phones, < 500px height) */
+      @media (max-height: 500px) {
+        :root {
+          --slide-padding: clamp(0.4rem, 2vw, 1rem);
+          --title-size: clamp(1rem, 3.5vw, 1.5rem);
+          --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
+          --body-size: clamp(0.65rem, 1vw, 0.85rem);
+        }
+      }
+
+      /* Narrow viewports (< 600px width) */
+      @media (max-width: 600px) {
+        :root {
+          --title-size: clamp(1.25rem, 7vw, 2.5rem);
+        }
+
+        /* Stack grids vertically */
+        .grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* ===========================================
+         REDUCED MOTION
+         Respect user preferences
+         =========================================== */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          transition-duration: 0.2s !important;
+        }
+
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      /* === APP SHELL === */
+      html {
+        scroll-snap-type: none;
+      }
+
+      body {
+        overflow: hidden;
+        font-family: var(--font-body);
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 20% 20%, rgba(120, 199, 176, 0.18), transparent 38%),
+          radial-gradient(circle at 80% 12%, rgba(91, 124, 255, 0.14), transparent 34%),
+          linear-gradient(135deg, #f0e9de 0%, #fbf8f2 100%);
+        transition: background 700ms var(--ease-slide);
+      }
+
+      body[data-tone="ink"] {
+        background:
+          radial-gradient(circle at 20% 20%, rgba(120, 199, 176, 0.14), transparent 36%),
+          radial-gradient(circle at 82% 18%, rgba(91, 124, 255, 0.18), transparent 38%),
+          linear-gradient(135deg, #0a111a 0%, #121b2a 48%, #0d1522 100%);
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.32;
+        background-image:
+          linear-gradient(rgba(17, 23, 36, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17, 23, 36, 0.05) 1px, transparent 1px);
+        background-size: clamp(28px, 4vw, 54px) clamp(28px, 4vw, 54px);
+        mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 88%);
+      }
+
+      main.deck {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        height: 100dvh;
+        overflow: hidden;
+        isolation: isolate;
+      }
+
+      .progress-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: clamp(0.2rem, 0.35vw, 0.32rem);
+        z-index: 20;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      .progress-fill {
+        display: block;
+        height: 100%;
+        width: 7.69%;
+        background: linear-gradient(90deg, var(--mint), var(--sky));
+        box-shadow: 0 0 24px rgba(120, 199, 176, 0.5);
+        transition: width 600ms var(--ease-slide);
+      }
+
+      .transition-veil {
+        position: fixed;
+        inset: 0;
+        z-index: 18;
+        pointer-events: none;
+        opacity: 0;
+        background:
+          linear-gradient(
+            180deg,
+            rgba(120, 199, 176, 0.18) 0%,
+            rgba(91, 124, 255, 0.14) 35%,
+            rgba(17, 23, 36, 0.08) 100%
+          );
+        mix-blend-mode: screen;
+      }
+
+      body.is-transitioning-forward .transition-veil {
+        animation: veil-forward 720ms var(--ease-slide);
+      }
+
+      body.is-transitioning-backward .transition-veil {
+        animation: veil-backward 720ms var(--ease-slide);
+      }
+
+      @keyframes veil-forward {
+        0% {
+          opacity: 0;
+          transform: translateY(100%);
+        }
+        35% {
+          opacity: 0.72;
+          transform: translateY(0%);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-100%);
+        }
+      }
+
+      @keyframes veil-backward {
+        0% {
+          opacity: 0;
+          transform: translateY(-100%);
+        }
+        35% {
+          opacity: 0.72;
+          transform: translateY(0%);
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(100%);
+        }
+      }
+
+      /* === SLIDE TRANSITIONS === */
+      .deck .slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transform: translate3d(0, 8%, 0) scale(0.985);
+        transition:
+          opacity 760ms var(--ease-slide),
+          transform 900ms var(--ease-slide),
+          filter 900ms var(--ease-slide);
+        filter: blur(2px) saturate(0.9);
+      }
+
+      .deck .slide.is-before {
+        transform: translate3d(0, -8%, 0) scale(0.985);
+      }
+
+      .deck .slide.is-after {
+        transform: translate3d(0, 8%, 0) scale(0.985);
+      }
+
+      .deck .slide.is-active {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translate3d(0, 0, 0) scale(1);
+        filter: blur(0) saturate(1);
+        z-index: 2;
+      }
+
+      /* === REVEAL MOTION === */
+      .reveal {
+        opacity: 0;
+        transform: translateY(clamp(12px, 1.8vw, 28px));
+        transition:
+          opacity 620ms var(--ease-out-expo),
+          transform 620ms var(--ease-out-expo),
+          filter 620ms var(--ease-out-expo);
+        filter: blur(8px);
+      }
+
+      .slide.visible .reveal {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+
+      .slide.visible .delay-1 {
+        transition-delay: 0.08s;
+      }
+
+      .slide.visible .delay-2 {
+        transition-delay: 0.16s;
+      }
+
+      .slide.visible .delay-3 {
+        transition-delay: 0.24s;
+      }
+
+      .slide.visible .delay-4 {
+        transition-delay: 0.32s;
+      }
+
+      .slide.visible .delay-5 {
+        transition-delay: 0.4s;
+      }
+
+      /* === SHARED TYPOGRAPHY === */
+      .eyebrow {
+        font-family: var(--font-mono);
+        font-size: clamp(0.68rem, 0.92vw, 0.86rem);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .slide-title,
+      .hero-title {
+        font-family: var(--font-display);
+        font-weight: 700;
+        line-height: 0.94;
+        letter-spacing: -0.035em;
+      }
+
+      .slide-title {
+        font-size: clamp(2rem, 5vw, 4.6rem);
+        max-width: 14ch;
+      }
+
+      .hero-title {
+        font-size: clamp(2.3rem, 6.2vw, 6.2rem);
+        max-width: 11.5ch;
+      }
+
+      .lede,
+      .body-copy {
+        font-size: clamp(0.88rem, 1.45vw, 1.1rem);
+        line-height: 1.5;
+        color: inherit;
+      }
+
+      .body-copy {
+        max-width: 62ch;
+      }
+
+      .muted {
+        color: var(--ink-muted);
+      }
+
+      .ink .muted {
+        color: rgba(244, 239, 230, 0.72);
+      }
+
+      .highlight {
+        color: var(--sky);
+      }
+
+      .ink .highlight {
+        color: var(--mint);
+      }
+
+      /* === SHARED LAYOUT === */
+      .slide.paper {
+        color: var(--ink);
+        background:
+          linear-gradient(135deg, rgba(255, 255, 255, 0.25), transparent 48%),
+          linear-gradient(135deg, #f6f1e8 0%, #ede4d5 100%);
+      }
+
+      .slide.ink {
+        color: var(--paper);
+        background:
+          radial-gradient(circle at 16% 12%, rgba(120, 199, 176, 0.16), transparent 30%),
+          radial-gradient(circle at 84% 24%, rgba(91, 124, 255, 0.16), transparent 34%),
+          linear-gradient(135deg, #0b1320 0%, #121b2b 45%, #0d1623 100%);
+      }
+
+      .slide.paper::before,
+      .slide.ink::before {
+        content: "";
+        position: absolute;
+        inset: clamp(0.8rem, 2vw, 1.6rem);
+        border-radius: clamp(1rem, 2vw, 1.8rem);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        pointer-events: none;
+      }
+
+      .slide.paper::before {
+        border-color: rgba(17, 23, 36, 0.08);
+      }
+
+      .frame {
+        display: grid;
+        grid-template-columns: minmax(78px, 11vw) 1fr;
+        gap: clamp(1rem, 2.2vw, 2.6rem);
+        width: 100%;
+        height: 100%;
+        align-items: stretch;
+      }
+
+      .rail {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: clamp(0.8rem, 1.6vw, 1.2rem);
+        padding: clamp(0.4rem, 1vw, 0.8rem) 0;
+        border-right: 1px solid rgba(17, 23, 36, 0.12);
+      }
+
+      .ink .rail {
+        border-right-color: rgba(244, 239, 230, 0.18);
+      }
+
+      .rail-top {
+        display: grid;
+        gap: clamp(0.5rem, 1vw, 0.8rem);
+      }
+
+      .rail-index {
+        font-family: var(--font-display);
+        font-size: clamp(2rem, 5vw, 4.6rem);
+        line-height: 0.85;
+        letter-spacing: -0.05em;
+      }
+
+      .rail-label,
+      .rail-series {
+        font-family: var(--font-mono);
+        font-size: clamp(0.66rem, 0.9vw, 0.82rem);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .rail-series {
+        opacity: 0.72;
+      }
+
+      .content-stack {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: clamp(1rem, 2.4vw, 2rem);
+        min-width: 0;
+      }
+
+      .slide-header {
+        display: grid;
+        gap: clamp(0.6rem, 1.4vw, 1rem);
+      }
+
+      .layout-split {
+        display: grid;
+        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        gap: clamp(1rem, 2vw, 1.8rem);
+        align-items: stretch;
+        min-height: 0;
+      }
+
+      .layout-wide {
+        display: grid;
+        gap: clamp(1rem, 2vw, 1.6rem);
+      }
+
+      .stack {
+        display: grid;
+        gap: clamp(0.8rem, 1.5vw, 1.1rem);
+        min-height: 0;
+      }
+
+      .card-surface {
+        position: relative;
+        overflow: hidden;
+        border-radius: clamp(1rem, 1.8vw, 1.5rem);
+        padding: clamp(1rem, 2.2vw, 1.6rem);
+      }
+
+      .paper .card-surface {
+        background: rgba(255, 255, 255, 0.55);
+        border: 1px solid rgba(17, 23, 36, 0.08);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .ink .card-surface {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: var(--shadow-deep);
+      }
+
+      .mini-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55em;
+        font-family: var(--font-mono);
+        font-size: clamp(0.66rem, 0.82vw, 0.8rem);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.86;
+      }
+
+      .mini-label::before {
+        content: "";
+        width: clamp(0.4rem, 0.6vw, 0.52rem);
+        height: clamp(0.4rem, 0.6vw, 0.52rem);
+        border-radius: 999px;
+        background: var(--mint);
+        box-shadow: 0 0 0 0.32rem rgba(120, 199, 176, 0.12);
+      }
+
+      .paper .mini-label::before {
+        background: var(--sky);
+        box-shadow: 0 0 0 0.32rem rgba(91, 124, 255, 0.12);
+      }
+
+      .insight-list {
+        list-style: none;
+        display: grid;
+        gap: clamp(0.65rem, 1.1vw, 0.92rem);
+        max-width: min(100%, 56rem);
+      }
+
+      .insight-list li {
+        position: relative;
+        padding-left: clamp(1.1rem, 1.8vw, 1.45rem);
+        font-size: clamp(0.9rem, 1.35vw, 1.08rem);
+        line-height: 1.42;
+      }
+
+      .insight-list li::before {
+        content: "";
+        position: absolute;
+        top: 0.6em;
+        left: 0;
+        width: clamp(0.38rem, 0.55vw, 0.46rem);
+        height: clamp(0.38rem, 0.55vw, 0.46rem);
+        border-radius: 999px;
+        background: var(--sky);
+        box-shadow: 0 0 0 0.28rem rgba(91, 124, 255, 0.1);
+      }
+
+      .ink .insight-list li::before {
+        background: var(--mint);
+        box-shadow: 0 0 0 0.28rem rgba(120, 199, 176, 0.12);
+      }
+
+      .metric-grid,
+      .citation-grid,
+      .process-grid,
+      .lesson-grid,
+      .future-grid {
+        display: grid;
+        gap: clamp(0.7rem, 1.2vw, 1rem);
+      }
+
+      .metric-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .citation-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .process-grid,
+      .lesson-grid,
+      .future-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .metric-card,
+      .citation-card,
+      .process-card,
+      .lesson-card,
+      .future-card,
+      .limit-item,
+      .implication-card {
+        display: grid;
+        gap: clamp(0.32rem, 0.65vw, 0.52rem);
+      }
+
+      .metric-card strong,
+      .quote-stat strong,
+      .hero-stat strong {
+        font-family: var(--font-display);
+        font-size: clamp(1.35rem, 2.6vw, 2.2rem);
+        line-height: 0.92;
+      }
+
+      .metric-card span,
+      .citation-card p,
+      .process-card p,
+      .lesson-card p,
+      .future-card p,
+      .limit-item p,
+      .implication-card p {
+        font-size: clamp(0.78rem, 1.05vw, 0.94rem);
+        line-height: 1.42;
+      }
+
+      .metric-card em,
+      .citation-card em,
+      .process-card em,
+      .future-card em,
+      .lesson-card em {
+        font-family: var(--font-mono);
+        font-style: normal;
+        font-size: clamp(0.62rem, 0.82vw, 0.78rem);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.72;
+      }
+
+      /* === TITLE SLIDE === */
+      .title-shell {
+        display: grid;
+        grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+        gap: clamp(1rem, 2.5vw, 2.4rem);
+        width: 100%;
+        height: 100%;
+        align-items: center;
+      }
+
+      .title-copy {
+        display: grid;
+        gap: clamp(0.8rem, 1.5vw, 1.2rem);
+        align-content: center;
+      }
+
+      .title-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: clamp(0.55rem, 1vw, 0.8rem);
+        padding-top: clamp(0.45rem, 0.8vw, 0.7rem);
+      }
+
+      .meta-chip {
+        padding: clamp(0.45rem, 0.8vw, 0.62rem) clamp(0.72rem, 1vw, 0.92rem);
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.05);
+        font-family: var(--font-mono);
+        font-size: clamp(0.66rem, 0.82vw, 0.78rem);
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+      }
+
+      .hero-panel {
+        position: relative;
+        min-height: min(52vh, 480px);
+      }
+
+      .hero-panel::before,
+      .hero-panel::after {
+        content: "";
+        position: absolute;
+        border-radius: 999px;
+        filter: blur(24px);
+      }
+
+      .hero-panel::before {
+        width: clamp(7rem, 14vw, 12rem);
+        height: clamp(7rem, 14vw, 12rem);
+        top: 6%;
+        left: 4%;
+        background: rgba(120, 199, 176, 0.18);
+      }
+
+      .hero-panel::after {
+        width: clamp(9rem, 18vw, 14rem);
+        height: clamp(9rem, 18vw, 14rem);
+        right: 0;
+        bottom: 6%;
+        background: rgba(91, 124, 255, 0.16);
+      }
+
+      .hero-gridlines {
+        position: absolute;
+        inset: 0;
+        opacity: 0.26;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.11) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.11) 1px, transparent 1px);
+        background-size: clamp(28px, 4vw, 58px) clamp(28px, 4vw, 58px);
+      }
+
+      .signal-cluster {
+        position: absolute;
+        inset: clamp(0.9rem, 2vw, 1.4rem);
+        display: grid;
+        align-content: end;
+        gap: clamp(0.8rem, 1.4vw, 1rem);
+      }
+
+      .signal-badge {
+        align-self: start;
+        justify-self: end;
+        padding: clamp(0.5rem, 0.9vw, 0.65rem) clamp(0.7rem, 1vw, 0.95rem);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.09);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        font-family: var(--font-mono);
+        font-size: clamp(0.64rem, 0.8vw, 0.76rem);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      .signal-track {
+        position: relative;
+        display: grid;
+        gap: clamp(0.7rem, 1.2vw, 0.9rem);
+      }
+
+      .signal-row {
+        position: relative;
+        display: grid;
+        gap: clamp(0.35rem, 0.7vw, 0.5rem);
+      }
+
+      .signal-row span {
+        font-family: var(--font-mono);
+        font-size: clamp(0.64rem, 0.84vw, 0.78rem);
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+
+      .signal-bar {
+        height: clamp(1.3rem, 2vw, 1.7rem);
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.07);
+        overflow: hidden;
+      }
+
+      .signal-bar::after {
+        content: "";
+        display: block;
+        height: 100%;
+        border-radius: inherit;
+      }
+
+      .signal-bar.sleep::after {
+        width: 52%;
+        background: linear-gradient(90deg, rgba(120, 199, 176, 0.3), rgba(120, 199, 176, 0.95));
+      }
+
+      .signal-bar.study::after {
+        width: 56%;
+        background: linear-gradient(90deg, rgba(91, 124, 255, 0.28), rgba(91, 124, 255, 0.95));
+      }
+
+      .signal-bar.gpa::after {
+        width: 38%;
+        background: linear-gradient(90deg, rgba(201, 85, 61, 0.28), rgba(201, 85, 61, 0.92));
+      }
+
+      .hero-note {
+        display: grid;
+        gap: 0.32rem;
+        max-width: 34ch;
+      }
+
+      /* === QUESTION / PURPOSE === */
+      .question-card {
+        display: grid;
+        gap: clamp(0.7rem, 1.25vw, 1rem);
+      }
+
+      .question-text {
+        font-family: var(--font-display);
+        font-size: clamp(1.25rem, 2.5vw, 2.2rem);
+        line-height: 1.08;
+        letter-spacing: -0.03em;
+        max-width: 22ch;
+      }
+
+      .why-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(0.7rem, 1.1vw, 0.9rem);
+      }
+
+      /* === LITERATURE / GAP === */
+      .gap-panel {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) clamp(2rem, 6vw, 4.4rem) minmax(0, 1fr);
+        gap: clamp(0.75rem, 1.4vw, 1rem);
+        align-items: stretch;
+      }
+
+      .gap-bridge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--font-display);
+        font-size: clamp(1.4rem, 3.5vw, 3rem);
+        color: var(--sky);
+      }
+
+      .ink .gap-bridge {
+        color: var(--mint);
+      }
+
+      /* === HYPOTHESIS === */
+      .expectation-card {
+        display: grid;
+        gap: clamp(0.8rem, 1.2vw, 1rem);
+      }
+
+      .trend-sketch {
+        position: relative;
+        min-height: clamp(12rem, 24vh, 16rem);
+        border-radius: clamp(0.9rem, 1.2vw, 1.1rem);
+        border: 1px solid rgba(17, 23, 36, 0.08);
+        background:
+          linear-gradient(rgba(17, 23, 36, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17, 23, 36, 0.06) 1px, transparent 1px),
+          linear-gradient(135deg, rgba(91, 124, 255, 0.05), rgba(120, 199, 176, 0.06));
+        background-size: 24px 24px, 24px 24px, auto;
+      }
+
+      .trend-sketch .axis-x,
+      .trend-sketch .axis-y {
+        position: absolute;
+        background: rgba(17, 23, 36, 0.26);
+      }
+
+      .trend-sketch .axis-x {
+        left: 10%;
+        right: 8%;
+        bottom: 18%;
+        height: 1px;
+      }
+
+      .trend-sketch .axis-y {
+        left: 10%;
+        top: 10%;
+        bottom: 18%;
+        width: 1px;
+      }
+
+      .trend-sketch svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      .assumption-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: clamp(0.55rem, 0.9vw, 0.7rem);
+      }
+
+      .assumption-chip {
+        padding: clamp(0.46rem, 0.8vw, 0.62rem) clamp(0.72rem, 1vw, 0.9rem);
+        border-radius: 999px;
+        font-size: clamp(0.74rem, 0.95vw, 0.88rem);
+        background: rgba(91, 124, 255, 0.1);
+        border: 1px solid rgba(91, 124, 255, 0.16);
+      }
+
+      /* === METHODOLOGY === */
+      .method-note {
+        display: grid;
+        gap: clamp(0.75rem, 1.1vw, 0.9rem);
+      }
+
+      .method-note .warning {
+        padding: clamp(0.8rem, 1.2vw, 1rem);
+        border-radius: clamp(0.9rem, 1.2vw, 1.1rem);
+        background: rgba(201, 85, 61, 0.1);
+        border: 1px solid rgba(201, 85, 61, 0.18);
+      }
+
+      /* === RESULTS SLIDES === */
+      .chart-panel {
+        display: grid;
+        gap: clamp(0.7rem, 1.2vw, 0.9rem);
+      }
+
+      .flat-chart {
+        position: relative;
+        min-height: clamp(14rem, 28vh, 18rem);
+        border-radius: clamp(0.9rem, 1.3vw, 1.15rem);
+        background:
+          linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+        background-size: 28px 28px, 28px 28px, auto;
+        overflow: hidden;
+      }
+
+      .paper .flat-chart {
+        background:
+          linear-gradient(rgba(17, 23, 36, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17, 23, 36, 0.08) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(17, 23, 36, 0.04), rgba(17, 23, 36, 0.02));
+        background-size: 28px 28px, 28px 28px, auto;
+      }
+
+      .flat-chart::before {
+        content: "";
+        position: absolute;
+        left: 11%;
+        bottom: 13%;
+        width: 1px;
+        height: 74%;
+        background: rgba(255, 255, 255, 0.28);
+      }
+
+      .flat-chart::after {
+        content: "";
+        position: absolute;
+        left: 11%;
+        right: 8%;
+        bottom: 13%;
+        height: 1px;
+        background: rgba(255, 255, 255, 0.28);
+      }
+
+      .paper .flat-chart::before,
+      .paper .flat-chart::after {
+        background: rgba(17, 23, 36, 0.28);
+      }
+
+      .trend-line-flat {
+        position: absolute;
+        left: 14%;
+        right: 11%;
+        top: 47%;
+        height: 2px;
+        background: linear-gradient(90deg, var(--mint), var(--sky));
+        transform: rotate(-2deg);
+        box-shadow: 0 0 18px rgba(120, 199, 176, 0.42);
+      }
+
+      .trend-point {
+        position: absolute;
+        width: clamp(0.5rem, 0.8vw, 0.68rem);
+        height: clamp(0.5rem, 0.8vw, 0.68rem);
+        border-radius: 999px;
+        background: var(--paper);
+        border: 2px solid var(--mint);
+        box-shadow: 0 0 0 0.35rem rgba(120, 199, 176, 0.12);
+      }
+
+      .paper .trend-point {
+        background: white;
+      }
+
+      .chart-caption {
+        font-family: var(--font-mono);
+        font-size: clamp(0.66rem, 0.8vw, 0.78rem);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.8;
+      }
+
+      .results-strip {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: clamp(0.7rem, 1vw, 0.9rem);
+      }
+
+      .quote-stat {
+        display: grid;
+        gap: clamp(0.28rem, 0.55vw, 0.42rem);
+      }
+
+      .coef-chart {
+        display: grid;
+        gap: clamp(0.8rem, 1.1vw, 1rem);
+      }
+
+      .coef-row {
+        display: grid;
+        grid-template-columns: minmax(88px, 0.28fr) minmax(160px, 1fr) minmax(68px, 0.18fr);
+        gap: clamp(0.55rem, 1vw, 0.75rem);
+        align-items: center;
+      }
+
+      .coef-name,
+      .coef-value {
+        font-family: var(--font-mono);
+        font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+      }
+
+      .coef-track {
+        position: relative;
+        height: clamp(1rem, 1.5vw, 1.15rem);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.08);
+        overflow: hidden;
+      }
+
+      .paper .coef-track {
+        background: rgba(17, 23, 36, 0.08);
+      }
+
+      .coef-track::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 1px;
+        background: rgba(255, 255, 255, 0.26);
+      }
+
+      .paper .coef-track::before {
+        background: rgba(17, 23, 36, 0.22);
+      }
+
+      .coef-bar {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+      }
+
+      .coef-bar.positive {
+        left: 50%;
+        width: calc(var(--size) * 1%);
+        background: linear-gradient(90deg, rgba(91, 124, 255, 0.3), rgba(91, 124, 255, 0.94));
+      }
+
+      .coef-bar.negative {
+        right: 50%;
+        width: calc(var(--size) * 1%);
+        background: linear-gradient(90deg, rgba(201, 85, 61, 0.94), rgba(201, 85, 61, 0.3));
+      }
+
+      /* === CONCLUSION / IMPLICATIONS === */
+      .statement-card {
+        display: grid;
+        gap: clamp(0.8rem, 1.2vw, 1rem);
+      }
+
+      .statement-card h3 {
+        font-family: var(--font-display);
+        font-size: clamp(1.5rem, 3vw, 2.8rem);
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+        max-width: 18ch;
+      }
+
+      .statement-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: clamp(0.55rem, 0.9vw, 0.72rem);
+      }
+
+      .statement-tags span {
+        padding: clamp(0.45rem, 0.8vw, 0.62rem) clamp(0.72rem, 1vw, 0.92rem);
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(255, 255, 255, 0.05);
+        font-size: clamp(0.74rem, 0.95vw, 0.86rem);
+      }
+
+      .paper .statement-tags span {
+        border-color: rgba(17, 23, 36, 0.1);
+        background: rgba(17, 23, 36, 0.04);
+      }
+
+      .implication-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(0.8rem, 1.2vw, 1rem);
+      }
+
+      /* === LIMITATIONS / FUTURE / REFLECTION === */
+      .limitations-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: clamp(0.7rem, 1vw, 0.9rem);
+      }
+
+      .limit-item {
+        grid-template-columns: clamp(2.4rem, 4vw, 3rem) 1fr;
+        align-items: start;
+        padding: clamp(0.85rem, 1.2vw, 1rem);
+        border-radius: clamp(0.9rem, 1.2vw, 1.1rem);
+        border: 1px solid rgba(17, 23, 36, 0.08);
+        background: rgba(255, 255, 255, 0.46);
+      }
+
+      .limit-item:last-child {
+        grid-column: 1 / -1;
+      }
+
+      .limit-item strong,
+      .road-index {
+        font-family: var(--font-display);
+        font-size: clamp(1.2rem, 2vw, 1.7rem);
+        line-height: 0.95;
+      }
+
+      .roadmap {
+        display: grid;
+        gap: clamp(0.75rem, 1vw, 0.92rem);
+      }
+
+      .road-step {
+        display: grid;
+        grid-template-columns: clamp(2.6rem, 4vw, 3.2rem) 1fr;
+        gap: clamp(0.7rem, 1vw, 0.9rem);
+        align-items: start;
+        padding: clamp(0.85rem, 1.2vw, 1rem);
+        border-radius: clamp(0.9rem, 1.2vw, 1.1rem);
+      }
+
+      .ink .road-step {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .paper .road-step {
+        background: rgba(255, 255, 255, 0.5);
+        border: 1px solid rgba(17, 23, 36, 0.08);
+      }
+
+      .reflection-band {
+        display: grid;
+        gap: clamp(0.7rem, 1vw, 0.9rem);
+        padding: clamp(0.9rem, 1.25vw, 1rem);
+        border-radius: clamp(1rem, 1.4vw, 1.2rem);
+        background:
+          linear-gradient(135deg, rgba(120, 199, 176, 0.14), rgba(91, 124, 255, 0.14)),
+          rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      /* === RESPONSIVE ADJUSTMENTS === */
+      @media (max-width: 1080px) {
+        .title-shell,
+        .layout-split {
+          grid-template-columns: 1fr;
+        }
+
+        .metric-grid,
+        .why-grid,
+        .results-strip,
+        .implication-grid,
+        .process-grid,
+        .lesson-grid,
+        .future-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 840px) {
+        .frame {
+          grid-template-columns: 1fr;
+        }
+
+        .rail {
+          display: grid;
+          grid-template-columns: auto 1fr auto;
+          align-items: end;
+          gap: clamp(0.7rem, 1vw, 0.9rem);
+          padding-bottom: clamp(0.8rem, 1vw, 0.9rem);
+          border-right: none;
+          border-bottom: 1px solid rgba(17, 23, 36, 0.12);
+        }
+
+        .ink .rail {
+          border-bottom-color: rgba(244, 239, 230, 0.18);
+        }
+
+        .rail-top {
+          display: flex;
+          align-items: end;
+          gap: clamp(0.55rem, 0.8vw, 0.72rem);
+        }
+
+        .rail-bottom {
+          justify-self: end;
+          text-align: right;
+        }
+
+        .gap-panel {
+          grid-template-columns: 1fr;
+        }
+
+        .gap-panel {
+          gap: clamp(0.7rem, 1vw, 0.9rem);
+        }
+
+        .gap-bridge {
+          min-height: clamp(2rem, 6vw, 2.8rem);
+        }
+      }
+
+      @media (max-width: 640px) {
+        .limitations-list {
+          grid-template-columns: 1fr;
+        }
+
+        .limit-item:last-child {
+          grid-column: auto;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .transition-veil {
+          display: none;
+        }
+
+        .deck .slide {
+          transform: none !important;
+          filter: none !important;
+        }
+
+        .reveal {
+          transform: none !important;
+          filter: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body data-tone="ink">
+    <!-- === PASSIVE PROGRESS INDICATOR === -->
+    <div class="progress-bar" aria-hidden="true">
+      <span class="progress-fill"></span>
+    </div>
+
+    <!-- === TRANSITION VEIL === -->
+    <div class="transition-veil" aria-hidden="true"></div>
+
+    <!--
+      Source basis:
+      1. AP Research draft paper provided by the user.
+      2. Local AP Research presentation guideline PDF provided by the user.
+      3. College Board AP Research assessment page and 2025 Presentation and Oral Defense Scoring Guidelines.
+    -->
+    <main
+      class="deck"
+      aria-label="AP Research presentation on nightly sleep duration and GPA"
+    >
+      <!-- === SLIDE 01: TITLE === -->
+      <section
+        class="slide ink is-active visible"
+        id="slide-01"
+        data-tone="ink"
+        aria-labelledby="slide-01-title"
+      >
+        <div class="slide-content">
+          <div class="title-shell">
+            <div class="title-copy">
+              <p class="eyebrow reveal delay-1">AP Research Presentation</p>
+              <h1 class="hero-title reveal delay-2" id="slide-01-title">
+                To What Extent Is Nightly Sleep Duration Associated with GPA?
+              </h1>
+              <p class="lede muted reveal delay-3">
+                A bounded secondary-data analysis of the Student Lifestyle
+                Dataset, framed for the AP Research presentation and oral
+                defense.
+              </p>
+              <div class="title-meta reveal delay-4">
+                <span class="meta-chip">[Your Name]</span>
+                <span class="meta-chip">[School Name]</span>
+                <span class="meta-chip">AP Research</span>
+                <span class="meta-chip">2026</span>
+                <span class="meta-chip">Sleep x GPA</span>
+              </div>
+            </div>
+
+            <div class="hero-panel card-surface reveal delay-5">
+              <div class="hero-gridlines" aria-hidden="true"></div>
+              <div class="signal-cluster">
+                <div class="signal-badge">Research Lens</div>
+                <div class="hero-note">
+                  <span class="mini-label">Core Focus</span>
+                  <p class="body-copy">
+                    Testing whether sleep remains meaningful once it is placed
+                    beside study time, extracurriculars, physical activity, and
+                    a fixed 24-hour day.
+                  </p>
+                </div>
+                <div class="signal-track">
+                  <div class="signal-row">
+                    <span>Nightly Sleep</span>
+                    <div class="signal-bar sleep"></div>
+                  </div>
+                  <div class="signal-row">
+                    <span>Study Hours</span>
+                    <div class="signal-bar study"></div>
+                  </div>
+                  <div class="signal-row">
+                    <span>Academic Outcome</span>
+                    <div class="signal-bar gpa"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Speaker note: Open with the question, then explain that the study tests one public dataset rather than all students. -->
+      </section>
+
+      <!-- === SLIDE 02: QUESTION AND PURPOSE === -->
+      <section
+        class="slide paper is-after"
+        id="slide-02"
+        data-tone="paper"
+        aria-labelledby="slide-02-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">02</span>
+                <div>
+                  <div class="rail-label">Research Design</div>
+                  <div class="rail-series">Question + Purpose</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Sleep x GPA</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Question and Purpose</p>
+                <h2 class="slide-title reveal delay-2" id="slide-02-title">
+                  Why test sleep inside a lifestyle dataset?
+                </h2>
+              </header>
+
+              <div class="layout-split">
+                <div class="stack">
+                  <ul class="insight-list reveal delay-3">
+                    <li>
+                      Research question: To what extent is nightly sleep
+                      duration associated with GPA in the Student Lifestyle
+                      Dataset while considering other lifestyle factors?
+                    </li>
+                    <li>
+                      Sleep matters because it supports attention, memory
+                      consolidation, and cognitive control.
+                    </li>
+                    <li>
+                      Academic performance is shaped by competing daily
+                      behaviors, not one isolated habit.
+                    </li>
+                    <li>
+                      The purpose was to test whether sleep still appears
+                      meaningful inside one open, downloadable file.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="stack">
+                  <div class="question-card card-surface reveal delay-4">
+                    <span class="mini-label">Framing Statement</span>
+                    <p class="question-text">
+                      If the dataset records a full 24-hour routine, does sleep
+                      still predict academic performance once other uses of time
+                      are considered?
+                    </p>
+                  </div>
+
+                  <div class="why-grid reveal delay-5">
+                    <div class="metric-card card-surface">
+                      <em>Why Sleep</em>
+                      <strong>Biological</strong>
+                      <span>Linked to learning, focus, and memory.</span>
+                    </div>
+                    <div class="metric-card card-surface">
+                      <em>Why GPA</em>
+                      <strong>Practical</strong>
+                      <span>Captures sustained performance across courses.</span>
+                    </div>
+                    <div class="metric-card card-surface">
+                      <em>Why This File</em>
+                      <strong>Accessible</strong>
+                      <span>Replicable by other students using open data.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 03: LITERATURE OVERVIEW === -->
+      <section
+        class="slide paper is-after"
+        id="slide-03"
+        data-tone="paper"
+        aria-labelledby="slide-03-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">03</span>
+                <div>
+                  <div class="rail-label">Research Design</div>
+                  <div class="rail-series">Literature Overview</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Prior Scholarship</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Background / Context</p>
+                <h2 class="slide-title reveal delay-2" id="slide-03-title">
+                  Prior research treats sleep as credible, but not isolated.
+                </h2>
+              </header>
+
+              <div class="layout-wide">
+                <ul class="insight-list reveal delay-3">
+                  <li>
+                    Objective and longitudinal studies often connect longer,
+                    more consistent sleep with stronger academic outcomes.
+                  </li>
+                  <li>
+                    GPA is also shaped by broader lifestyle patterns such as
+                    study habits, time use, and competing daily behaviors.
+                  </li>
+                  <li>
+                    Several non-sleep lifestyle effects are modest or mixed,
+                    which makes context and measurement important.
+                  </li>
+                  <li>
+                    Main takeaway: sleep matters, but its meaning depends on
+                    what variables are present and how they are measured.
+                  </li>
+                </ul>
+
+                <div class="citation-grid reveal delay-4">
+                  <div class="citation-card card-surface">
+                    <em>Okano et al. 2019</em>
+                    <p>
+                      Sleep quality, duration, and consistency aligned with
+                      better academic performance.
+                    </p>
+                  </div>
+                  <div class="citation-card card-surface">
+                    <em>Creswell et al. 2023</em>
+                    <p>
+                      Average nightly sleep early in the semester predicted
+                      end-of-term GPA.
+                    </p>
+                  </div>
+                  <div class="citation-card card-surface">
+                    <em>Taylor et al. 2013</em>
+                    <p>
+                      Sleep still mattered, but only when interpreted beside
+                      other academic predictors.
+                    </p>
+                  </div>
+                  <div class="citation-card card-surface">
+                    <em>Park &amp; Swanson 2021</em>
+                    <p>
+                      Time-use patterns relate to GPA, yet many effects are
+                      relatively small.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 04: GAP === -->
+      <section
+        class="slide ink is-after"
+        id="slide-04"
+        data-tone="ink"
+        aria-labelledby="slide-04-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">04</span>
+                <div>
+                  <div class="rail-label">Research Design</div>
+                  <div class="rail-series">Gap in Research</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Why This Study</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Gap in Research</p>
+                <h2 class="slide-title reveal delay-2" id="slide-04-title">
+                  Stronger sleep studies exist, but open datasets ask a
+                  different question.
+                </h2>
+              </header>
+
+              <div class="gap-panel reveal delay-4">
+                <div class="card-surface stack">
+                  <span class="mini-label">Established Literature</span>
+                  <ul class="insight-list">
+                    <li>Often uses wearables, institutional cohorts, or repeated measurement.</li>
+                    <li>Can track quality, consistency, and timing, not just duration.</li>
+                    <li>Usually offers stronger evidence about academic effects over time.</li>
+                  </ul>
+                </div>
+
+                <div class="gap-bridge" aria-hidden="true">-&gt;</div>
+
+                <div class="card-surface stack">
+                  <span class="mini-label">This Project</span>
+                  <ul class="insight-list">
+                    <li>Uses one open lifestyle dataset that another student can download.</li>
+                    <li>Tests sleep in direct competition with other recorded uses of time.</li>
+                    <li>Makes a bounded claim about one file instead of a universal claim about all students.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <p class="body-copy muted reveal delay-5">
+                The gap is not "nobody has studied sleep." The gap is how sleep
+                behaves inside a simplified, openly accessible dataset where the
+                full day is already allocated.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 05: HYPOTHESIS === -->
+      <section
+        class="slide paper is-after"
+        id="slide-05"
+        data-tone="paper"
+        aria-labelledby="slide-05-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">05</span>
+                <div>
+                  <div class="rail-label">Research Design</div>
+                  <div class="rail-series">Hypothesis</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Initial Assumptions</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Hypothesis / Initial Assumptions</p>
+                <h2 class="slide-title reveal delay-2" id="slide-05-title">
+                  I expected longer sleep to align with higher GPA.
+                </h2>
+              </header>
+
+              <div class="layout-split">
+                <div class="stack">
+                  <ul class="insight-list reveal delay-3">
+                    <li>
+                      Primary hypothesis: longer nightly sleep duration would be
+                      positively associated with GPA.
+                    </li>
+                    <li>
+                      Secondary expectation: sleep would remain meaningful after
+                      accounting for other lifestyle variables.
+                    </li>
+                    <li>
+                      This expectation came from published scholarship rather
+                      than from the dataset itself.
+                    </li>
+                    <li>
+                      One early caution was that duration alone might miss sleep
+                      quality and consistency.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="expectation-card card-surface reveal delay-4">
+                  <span class="mini-label">Predicted Pattern</span>
+                  <div class="trend-sketch" aria-hidden="true">
+                    <div class="axis-x"></div>
+                    <div class="axis-y"></div>
+                    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+                      <path
+                        d="M12,77 C28,68 42,57 58,44 C72,34 82,27 92,20"
+                        fill="none"
+                        stroke="#5b7cff"
+                        stroke-width="2.8"
+                        stroke-linecap="round"
+                      />
+                      <circle cx="20" cy="70" r="2.4" fill="#5b7cff"></circle>
+                      <circle cx="35" cy="60" r="2.4" fill="#5b7cff"></circle>
+                      <circle cx="50" cy="48" r="2.4" fill="#5b7cff"></circle>
+                      <circle cx="68" cy="35" r="2.4" fill="#5b7cff"></circle>
+                      <circle cx="84" cy="24" r="2.4" fill="#5b7cff"></circle>
+                    </svg>
+                  </div>
+                  <div class="assumption-strip">
+                    <span class="assumption-chip">Longer sleep -> stronger GPA</span>
+                    <span class="assumption-chip">Sleep survives controls</span>
+                    <span class="assumption-chip">Literature-backed expectation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 06: METHODOLOGY === -->
+      <section
+        class="slide paper is-after"
+        id="slide-06"
+        data-tone="paper"
+        aria-labelledby="slide-06-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">06</span>
+                <div>
+                  <div class="rail-label">Research Design</div>
+                  <div class="rail-series">Methodology</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Quantitative Design</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Methodology</p>
+                <h2 class="slide-title reveal delay-2" id="slide-06-title">
+                  Secondary quantitative analysis of one public dataset.
+                </h2>
+              </header>
+
+              <div class="layout-split">
+                <div class="process-grid reveal delay-3">
+                  <div class="process-card card-surface">
+                    <em>Source</em>
+                    <strong>2,000 cases</strong>
+                    <p>Kaggle Student Lifestyle Dataset, 8 columns, no missing values retained.</p>
+                  </div>
+                  <div class="process-card card-surface">
+                    <em>Variables</em>
+                    <strong>GPA + Sleep</strong>
+                    <p>GPA as the dependent variable; sleep as the main predictor.</p>
+                  </div>
+                  <div class="process-card card-surface">
+                    <em>Controls</em>
+                    <strong>Study / Extra / Physical</strong>
+                    <p>Compared sleep against other plausible uses of time in the model.</p>
+                  </div>
+                  <div class="process-card card-surface">
+                    <em>Tests</em>
+                    <strong>r, ANOVA, OLS</strong>
+                    <p>Used descriptive statistics, Pearson correlation, ANOVA, and regression.</p>
+                  </div>
+                </div>
+
+                <div class="method-note reveal delay-4">
+                  <div class="card-surface stack">
+                    <span class="mini-label">Model Choice</span>
+                    <p class="body-copy">
+                      Final model: GPA = b0 + b1(Sleep) + b2(Study) +
+                      b3(Extracurricular) + b4(Physical Activity) + e
+                    </p>
+                    <p class="body-copy muted">Significance level: alpha = .05</p>
+                  </div>
+
+                  <div class="warning">
+                    <span class="mini-label">Critical Design Note</span>
+                    <p class="body-copy">
+                      The five time-use variables summed to exactly 24 hours in
+                      every observation. Social hours were omitted from the
+                      regression to avoid perfect multicollinearity, and stress
+                      was omitted because the dataset description says it is
+                      derived from study and sleep.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 07: DATA / EVIDENCE === -->
+      <section
+        class="slide ink is-after"
+        id="slide-07"
+        data-tone="ink"
+        aria-labelledby="slide-07-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">07</span>
+                <div>
+                  <div class="rail-label">Establish Argument</div>
+                  <div class="rail-series">Data / Evidence</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Results Snapshot</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Data / Evidence</p>
+                <h2 class="slide-title reveal delay-2" id="slide-07-title">
+                  The bivariate sleep-GPA relationship was essentially flat.
+                </h2>
+              </header>
+
+              <div class="layout-wide">
+                <div class="metric-grid reveal delay-3">
+                  <div class="metric-card card-surface">
+                    <em>Sample</em>
+                    <strong>2,000</strong>
+                    <span>Student records analyzed.</span>
+                  </div>
+                  <div class="metric-card card-surface">
+                    <em>Mean Sleep</em>
+                    <strong>7.50h</strong>
+                    <span>Average nightly sleep duration.</span>
+                  </div>
+                  <div class="metric-card card-surface">
+                    <em>Mean GPA</em>
+                    <strong>3.12</strong>
+                    <span>Average academic performance in the file.</span>
+                  </div>
+                  <div class="metric-card card-surface">
+                    <em>Sleep Range</em>
+                    <strong>5-10h</strong>
+                    <span>Broad enough for comparison, but still null.</span>
+                  </div>
+                </div>
+
+                <div class="layout-split">
+                  <div class="chart-panel card-surface reveal delay-4">
+                    <span class="mini-label">Sleep vs GPA</span>
+                    <div class="flat-chart" aria-hidden="true">
+                      <div class="trend-line-flat"></div>
+                      <span class="trend-point" style="left: 20%; top: 46%;"></span>
+                      <span class="trend-point" style="left: 34%; top: 47%;"></span>
+                      <span class="trend-point" style="left: 49%; top: 46%;"></span>
+                      <span class="trend-point" style="left: 66%; top: 48%;"></span>
+                      <span class="trend-point" style="left: 82%; top: 47%;"></span>
+                    </div>
+                    <p class="chart-caption">Pearson r = -0.004 | p = .848</p>
+                  </div>
+
+                  <div class="results-strip reveal delay-5">
+                    <div class="quote-stat card-surface">
+                      <em>Grouped Means</em>
+                      <strong>F = 0.94</strong>
+                      <span>ANOVA across five sleep bands was not significant (p = .438).</span>
+                    </div>
+                    <div class="quote-stat card-surface">
+                      <em>Threshold Check</em>
+                      <strong>p = .918</strong>
+                      <span>Students under 8 hours and 8+ hours had nearly identical GPAs.</span>
+                    </div>
+                    <div class="quote-stat card-surface">
+                      <em>Interpretation</em>
+                      <strong>Near Zero</strong>
+                      <span>Sleep duration alone explained virtually none of the GPA variation.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 08: ANALYSIS === -->
+      <section
+        class="slide ink is-after"
+        id="slide-08"
+        data-tone="ink"
+        aria-labelledby="slide-08-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">08</span>
+                <div>
+                  <div class="rail-label">Establish Argument</div>
+                  <div class="rail-series">Analysis</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">What the Model Means</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Analysis</p>
+                <h2 class="slide-title reveal delay-2" id="slide-08-title">
+                  Study time dominated the model; sleep still did not.
+                </h2>
+              </header>
+
+              <div class="layout-split">
+                <div class="stack">
+                  <ul class="insight-list reveal delay-3">
+                    <li>
+                      In the multivariable model, sleep was still not
+                      significant: B = -0.0059, p = .122.
+                    </li>
+                    <li>
+                      Study hours were the strongest academic signal: r = .734
+                      with GPA and B = 0.1531, p &lt; .001 in regression.
+                    </li>
+                    <li>
+                      The overall model fit was strong (R<sup>2</sup> = .541), but that
+                      fit came mostly from study time.
+                    </li>
+                    <li>
+                      Because the file encodes a closed 24-hour system, the
+                      coefficients reflect tradeoffs across the whole day.
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="coef-chart card-surface reveal delay-4">
+                  <span class="mini-label">Regression Coefficients</span>
+                  <div class="coef-row">
+                    <div class="coef-name">Sleep</div>
+                    <div class="coef-track">
+                      <div class="coef-bar negative" style="--size: 3.6;"></div>
+                    </div>
+                    <div class="coef-value">-0.0059</div>
+                  </div>
+                  <div class="coef-row">
+                    <div class="coef-name">Study</div>
+                    <div class="coef-track">
+                      <div class="coef-bar positive" style="--size: 46;"></div>
+                    </div>
+                    <div class="coef-value">+0.1531</div>
+                  </div>
+                  <div class="coef-row">
+                    <div class="coef-name">Extra</div>
+                    <div class="coef-track">
+                      <div class="coef-bar negative" style="--size: 5.4;"></div>
+                    </div>
+                    <div class="coef-value">-0.0088</div>
+                  </div>
+                  <div class="coef-row">
+                    <div class="coef-name">Physical</div>
+                    <div class="coef-track">
+                      <div class="coef-bar negative" style="--size: 0.8;"></div>
+                    </div>
+                    <div class="coef-value">-0.0013</div>
+                  </div>
+                  <p class="chart-caption">
+                    Visual emphasis shows relative dominance, not a common unit
+                    conversion.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Speaker note: This is where you explain the 24-hour tradeoff idea clearly. -->
+      </section>
+
+      <!-- === SLIDE 09: CONCLUSION === -->
+      <section
+        class="slide paper is-after"
+        id="slide-09"
+        data-tone="paper"
+        aria-labelledby="slide-09-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">09</span>
+                <div>
+                  <div class="rail-label">Establish Argument</div>
+                  <div class="rail-series">Conclusion</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Answer to the Question</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Conclusion</p>
+                <h2 class="slide-title reveal delay-2" id="slide-09-title">
+                  Within this dataset, sleep duration did not meaningfully
+                  explain GPA.
+                </h2>
+              </header>
+
+              <div class="layout-split">
+                <div class="statement-card card-surface reveal delay-3">
+                  <span class="mini-label">Most Defensible Claim</span>
+                  <h3>
+                    The hypothesis was not supported by the Student Lifestyle
+                    Dataset.
+                  </h3>
+                  <p class="body-copy">
+                    Study time, not sleep time, emerged as the clearest
+                    predictor of academic performance in this file.
+                  </p>
+                  <div class="statement-tags">
+                    <span>Sleep duration: weak / null</span>
+                    <span>Study hours: strongest signal</span>
+                    <span>Scope: this dataset only</span>
+                  </div>
+                </div>
+
+                <div class="stack reveal delay-4">
+                  <div class="metric-card card-surface">
+                    <em>Hypothesis</em>
+                    <strong>Not Supported</strong>
+                    <span>The observed file did not match the expected positive sleep pattern.</span>
+                  </div>
+                  <div class="metric-card card-surface">
+                    <em>Best Predictor</em>
+                    <strong>Study Time</strong>
+                    <span>The strongest academic signal tracked hours allocated to studying.</span>
+                  </div>
+                  <div class="metric-card card-surface">
+                    <em>Bounded Claim</em>
+                    <strong>Context Matters</strong>
+                    <span>The result explains this structured dataset, not all students everywhere.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 10: IMPLICATIONS === -->
+      <section
+        class="slide paper is-after"
+        id="slide-10"
+        data-tone="paper"
+        aria-labelledby="slide-10-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">10</span>
+                <div>
+                  <div class="rail-label">Establish Argument</div>
+                  <div class="rail-series">Implications</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Why It Matters</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Implications</p>
+                <h2 class="slide-title reveal delay-2" id="slide-10-title">
+                  The result says as much about the dataset as it does about the
+                  topic.
+                </h2>
+              </header>
+
+              <div class="implication-grid reveal delay-3">
+                <div class="implication-card card-surface">
+                  <em>Use</em>
+                  <p>
+                    Open datasets are valuable because the analysis is
+                    transparent, accessible, and easy for another student to
+                    replicate.
+                  </p>
+                </div>
+                <div class="implication-card card-surface">
+                  <em>Caution</em>
+                  <p>
+                    Accessibility is not the same as representativeness. A
+                    simple file can still produce narrow or misleading inferences
+                    if its provenance is weak.
+                  </p>
+                </div>
+                <div class="implication-card card-surface">
+                  <em>Topic-Level Lesson</em>
+                  <p>
+                    Simplified duration-only measures can understate a complex
+                    behavior like sleep quality, consistency, and timing.
+                  </p>
+                </div>
+                <div class="implication-card card-surface">
+                  <em>Research-Level Lesson</em>
+                  <p>
+                    Student researchers should examine variable construction,
+                    tradeoffs, and documentation before generalizing findings.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 11: LIMITATIONS === -->
+      <section
+        class="slide paper is-after"
+        id="slide-11"
+        data-tone="paper"
+        aria-labelledby="slide-11-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">11</span>
+                <div>
+                  <div class="rail-label">Establish Argument</div>
+                  <div class="rail-series">Limitations</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Study Weaknesses</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Limitations</p>
+                <h2 class="slide-title reveal delay-2" id="slide-11-title">
+                  The strongest limitations come from measurement and
+                  documentation.
+                </h2>
+              </header>
+
+              <div class="limitations-list reveal delay-3">
+                <div class="limit-item">
+                  <strong>01</strong>
+                  <p>No published sampling or recruitment procedure was provided for the dataset.</p>
+                </div>
+                <div class="limit-item">
+                  <strong>02</strong>
+                  <p>The design was cross-sectional, so the project can describe association but not causation.</p>
+                </div>
+                <div class="limit-item">
+                  <strong>03</strong>
+                  <p>Sleep was measured only as duration, not quality, regularity, timing, or fatigue.</p>
+                </div>
+                <div class="limit-item">
+                  <strong>04</strong>
+                  <p>The file lacked demographic and academic-background controls such as prior GPA or course load.</p>
+                </div>
+                <div class="limit-item">
+                  <strong>05</strong>
+                  <p>The closed 24-hour structure created compositional dependence among activities.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 12: FUTURE RESEARCH === -->
+      <section
+        class="slide ink is-after"
+        id="slide-12"
+        data-tone="ink"
+        aria-labelledby="slide-12-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">12</span>
+                <div>
+                  <div class="rail-label">Establish Argument</div>
+                  <div class="rail-series">Future Research</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Next Step Roadmap</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Future Research</p>
+                <h2 class="slide-title reveal delay-2" id="slide-12-title">
+                  A stronger follow-up would improve both the data and the
+                  method.
+                </h2>
+              </header>
+
+              <div class="layout-split">
+                <div class="roadmap reveal delay-3">
+                  <div class="road-step">
+                    <div class="road-index">01</div>
+                    <p>Use datasets with documented instruments, clearer sampling, and stronger provenance.</p>
+                  </div>
+                  <div class="road-step">
+                    <div class="road-index">02</div>
+                    <p>Add richer sleep measures, especially quality, consistency, and timing.</p>
+                  </div>
+                  <div class="road-step">
+                    <div class="road-index">03</div>
+                    <p>Compare open secondary data with institutional or longitudinal cohorts.</p>
+                  </div>
+                  <div class="road-step">
+                    <div class="road-index">04</div>
+                    <p>Apply compositional-data methods to variables constrained to a fixed 24-hour day.</p>
+                  </div>
+                </div>
+
+                <div class="future-grid reveal delay-4">
+                  <div class="future-card card-surface">
+                    <em>Data</em>
+                    <strong>Better Documentation</strong>
+                    <p>A stronger file should explain how participants and variables were actually generated.</p>
+                  </div>
+                  <div class="future-card card-surface">
+                    <em>Sleep</em>
+                    <strong>More Than Duration</strong>
+                    <p>Quality and regularity are prominent in the strongest published sleep studies.</p>
+                  </div>
+                  <div class="future-card card-surface">
+                    <em>Design</em>
+                    <strong>Longitudinal Evidence</strong>
+                    <p>Repeated measurement would better match the literature's view of cumulative sleep effects.</p>
+                  </div>
+                  <div class="future-card card-surface">
+                    <em>Analysis</em>
+                    <strong>Compositional Methods</strong>
+                    <p>These methods fit time-budget data better than treating all activities as independent.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 13: REFLECTION === -->
+      <section
+        class="slide ink is-after"
+        id="slide-13"
+        data-tone="ink"
+        aria-labelledby="slide-13-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">13</span>
+                <div>
+                  <div class="rail-label">Reflect</div>
+                  <div class="rail-series">Process and Growth</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Oral Defense Lens</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Reflection</p>
+                <h2 class="slide-title reveal delay-2" id="slide-13-title">
+                  The biggest lesson was learning to argue from what the data
+                  can actually support.
+                </h2>
+              </header>
+
+              <div class="lesson-grid reveal delay-3">
+                <div class="lesson-card card-surface">
+                  <em>Expectation</em>
+                  <strong>Topic vs File</strong>
+                  <p>I began with a literature-backed expectation that more sleep would help GPA.</p>
+                </div>
+                <div class="lesson-card card-surface">
+                  <em>Challenge</em>
+                  <strong>Dataset Structure</strong>
+                  <p>The hardest part was recognizing how provenance and the 24-hour constraint limited interpretation.</p>
+                </div>
+                <div class="lesson-card card-surface">
+                  <em>Growth</em>
+                  <strong>Research Judgment</strong>
+                  <p>I learned to treat multicollinearity, measurement quality, and documentation as part of the argument.</p>
+                </div>
+                <div class="lesson-card card-surface">
+                  <em>What I'd Change</em>
+                  <strong>Stronger Evidence</strong>
+                  <p>If I continued this project, I would keep the topic but move to a better-documented, richer dataset.</p>
+                </div>
+              </div>
+
+              <div class="reflection-band reveal delay-4">
+                <span class="mini-label">Defense-Ready Takeaway</span>
+                <p class="body-copy">
+                  The new understanding is not simply that "sleep does not
+                  matter." It is that conclusions about student success depend on
+                  how a dataset defines student life, measures behavior, and
+                  structures tradeoffs.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Speaker note: If asked what you learned, emphasize bounded claims, provenance, and stronger method fit. -->
+      </section>
+    </main>
+
+    <script>
+      /* === SLIDE PRESENTATION CONTROLLER === */
+      class SlidePresentation {
+        constructor() {
+          this.slides = Array.from(document.querySelectorAll(".deck .slide"));
+          this.progressFill = document.querySelector(".progress-fill");
+          this.body = document.body;
+          this.currentSlide = 0;
+          this.isAnimating = false;
+          this.wheelLocked = false;
+          this.touchStartY = 0;
+          this.touchDeltaY = 0;
+          this.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+          this.applySlideState(0, "forward", true);
+          this.setupKeyboardNav();
+          this.setupWheelNav();
+          this.setupTouchNav();
+          this.setupResizeHandling();
+        }
+
+        setupKeyboardNav() {
+          document.addEventListener("keydown", (event) => {
+            if (this.isAnimating) return;
+
+            const nextKeys = ["ArrowDown", "ArrowRight", "PageDown", " "];
+            const prevKeys = ["ArrowUp", "ArrowLeft", "PageUp"];
+
+            if (nextKeys.includes(event.key)) {
+              event.preventDefault();
+              this.goTo(this.currentSlide + 1, "forward");
+            } else if (prevKeys.includes(event.key)) {
+              event.preventDefault();
+              this.goTo(this.currentSlide - 1, "backward");
+            } else if (event.key === "Home") {
+              event.preventDefault();
+              this.goTo(0, "backward");
+            } else if (event.key === "End") {
+              event.preventDefault();
+              this.goTo(this.slides.length - 1, "forward");
+            }
+          });
+        }
+
+        setupWheelNav() {
+          window.addEventListener(
+            "wheel",
+            (event) => {
+              if (this.wheelLocked || this.isAnimating) return;
+
+              if (Math.abs(event.deltaY) < 28) return;
+
+              this.wheelLocked = true;
+              if (event.deltaY > 0) {
+                this.goTo(this.currentSlide + 1, "forward");
+              } else {
+                this.goTo(this.currentSlide - 1, "backward");
+              }
+
+              window.setTimeout(() => {
+                this.wheelLocked = false;
+              }, 760);
+            },
+            { passive: true }
+          );
+        }
+
+        setupTouchNav() {
+          window.addEventListener(
+            "touchstart",
+            (event) => {
+              const touch = event.changedTouches[0];
+              this.touchStartY = touch.clientY;
+              this.touchDeltaY = 0;
+            },
+            { passive: true }
+          );
+
+          window.addEventListener(
+            "touchmove",
+            (event) => {
+              const touch = event.changedTouches[0];
+              this.touchDeltaY = touch.clientY - this.touchStartY;
+            },
+            { passive: true }
+          );
+
+          window.addEventListener(
+            "touchend",
+            () => {
+              if (this.isAnimating) return;
+              if (Math.abs(this.touchDeltaY) < 55) return;
+
+              if (this.touchDeltaY < 0) {
+                this.goTo(this.currentSlide + 1, "forward");
+              } else {
+                this.goTo(this.currentSlide - 1, "backward");
+              }
+            },
+            { passive: true }
+          );
+        }
+
+        setupResizeHandling() {
+          window.addEventListener("resize", () => {
+            this.updateProgress();
+          });
+        }
+
+        goTo(index, direction) {
+          const clamped = Math.max(0, Math.min(index, this.slides.length - 1));
+          if (clamped === this.currentSlide) return;
+
+          this.isAnimating = true;
+          this.playTransition(direction);
+          this.applySlideState(clamped, direction, false);
+
+          const unlockDelay = this.reducedMotion.matches ? 160 : 860;
+          window.setTimeout(() => {
+            this.isAnimating = false;
+          }, unlockDelay);
+        }
+
+        applySlideState(index, direction, immediate) {
+          this.currentSlide = index;
+
+          this.slides.forEach((slide, slideIndex) => {
+            slide.classList.remove("is-active", "is-before", "is-after", "visible");
+            slide.setAttribute("aria-hidden", slideIndex === index ? "false" : "true");
+
+            if (slideIndex < index) {
+              slide.classList.add("is-before");
+            } else if (slideIndex > index) {
+              slide.classList.add("is-after");
+            }
+          });
+
+          const activeSlide = this.slides[index];
+          activeSlide.classList.add("is-active");
+          this.body.dataset.tone = activeSlide.dataset.tone || "paper";
+
+          if (immediate || this.reducedMotion.matches) {
+            activeSlide.classList.add("visible");
+          } else {
+            window.requestAnimationFrame(() => {
+              activeSlide.classList.add("visible");
+            });
+          }
+
+          this.updateProgress();
+          this.updateHash(activeSlide.id);
+        }
+
+        updateProgress() {
+          const progress = ((this.currentSlide + 1) / this.slides.length) * 100;
+          this.progressFill.style.width = `${progress}%`;
+        }
+
+        updateHash(id) {
+          if (!id) return;
+          if (history.replaceState) {
+            history.replaceState(null, "", `#${id}`);
+          }
+        }
+
+        playTransition(direction) {
+          if (this.reducedMotion.matches) return;
+
+          const forwardClass = "is-transitioning-forward";
+          const backwardClass = "is-transitioning-backward";
+          this.body.classList.remove(forwardClass, backwardClass);
+          void this.body.offsetWidth;
+          this.body.classList.add(direction === "backward" ? backwardClass : forwardClass);
+
+          window.setTimeout(() => {
+            this.body.classList.remove(forwardClass, backwardClass);
+          }, 760);
+        }
+      }
+
+      /* === INITIALIZE PRESENTATION === */
+      window.addEventListener("DOMContentLoaded", () => {
+        new SlidePresentation();
+      });
+    </script>
+  </body>
+</html>
