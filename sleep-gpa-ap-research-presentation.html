@@ -322,7 +322,7 @@
       .progress-fill {
         display: block;
         height: 100%;
-        width: 7.69%;
+        width: 6.67%;
         background: linear-gradient(90deg, var(--mint), var(--sky));
         box-shadow: 0 0 24px rgba(120, 199, 176, 0.5);
         transition: width 600ms var(--ease-slide);
@@ -1238,6 +1238,98 @@
         background: linear-gradient(90deg, rgba(201, 85, 61, 0.94), rgba(201, 85, 61, 0.3));
       }
 
+      .stats-layout {
+        display: grid;
+        grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+        gap: clamp(0.76rem, 1.12vw, 1.02rem);
+        align-items: stretch;
+        min-height: 0;
+      }
+
+      .data-table-card,
+      .visual-card,
+      .data-note {
+        display: grid;
+        gap: clamp(0.58rem, 0.86vw, 0.8rem);
+        min-height: 0;
+      }
+
+      .distribution-panel {
+        display: grid;
+        gap: clamp(0.62rem, 0.92vw, 0.82rem);
+      }
+
+      .stats-table-wrap {
+        overflow: hidden;
+        border-radius: clamp(0.88rem, 1.2vw, 1.04rem);
+        border: 1px solid rgba(17, 23, 36, 0.08);
+        background: rgba(255, 255, 255, 0.76);
+      }
+
+      .stats-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .stats-table th,
+      .stats-table td {
+        padding: clamp(0.42rem, 0.62vw, 0.56rem) clamp(0.46rem, 0.7vw, 0.62rem);
+        border-bottom: 1px solid rgba(17, 23, 36, 0.08);
+      }
+
+      .stats-table thead th {
+        font-family: var(--font-mono);
+        font-size: clamp(0.58rem, 0.72vw, 0.74rem);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--ink-muted);
+        text-align: right;
+      }
+
+      .stats-table th:first-child,
+      .stats-table td:first-child {
+        width: 34%;
+        text-align: left;
+      }
+
+      .stats-table td {
+        font-size: clamp(0.68rem, 0.86vw, 0.9rem);
+        text-align: right;
+      }
+
+      .stats-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      .chart-stage {
+        position: relative;
+        min-height: clamp(12.8rem, 28vh, 17rem);
+        border-radius: clamp(0.92rem, 1.2vw, 1.08rem);
+        overflow: hidden;
+        background:
+          linear-gradient(rgba(17, 23, 36, 0.06) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(17, 23, 36, 0.06) 1px, transparent 1px),
+          linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 239, 230, 0.98));
+        background-size: 34px 34px, 34px 34px, auto;
+        border: 1px solid rgba(17, 23, 36, 0.08);
+      }
+
+      .chart-stage.wide {
+        min-height: clamp(14.2rem, 31vh, 19rem);
+      }
+
+      .chart-stage svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .data-note .body-copy {
+        max-width: none;
+      }
+
       /* === CONCLUSION / IMPLICATIONS === */
       .statement-card {
         display: grid;
@@ -1390,6 +1482,26 @@
       #slide-12 .roadmap,
       #slide-13 .reflection-band {
         gap: clamp(0.5rem, 0.78vw, 0.66rem);
+      }
+
+      #slide-07 .stats-layout,
+      #slide-07a .layout-split,
+      #slide-07b .layout-split {
+        align-items: start;
+      }
+
+      #slide-07a .layout-split,
+      #slide-07b .layout-split {
+        grid-template-columns: minmax(0, 1.14fr) minmax(0, 0.86fr);
+      }
+
+      #slide-07 .chart-stage {
+        min-height: clamp(12.2rem, 26vh, 15.8rem);
+      }
+
+      #slide-07a .chart-stage,
+      #slide-07b .chart-stage {
+        min-height: clamp(14.6rem, 31vh, 19.4rem);
       }
 
       /* === SLIDE 02 MANUAL TUNING ===
@@ -1564,6 +1676,7 @@
 
       /* === RESPONSIVE ADJUSTMENTS === */
       @media (max-width: 1080px) {
+        .stats-layout,
         .title-shell,
         .layout-split {
           grid-template-columns: 1fr;
@@ -1624,6 +1737,11 @@
       }
 
       @media (max-width: 640px) {
+        .stats-table th,
+        .stats-table td {
+          padding: clamp(0.34rem, 0.52vw, 0.46rem);
+        }
+
         .limitations-list {
           grid-template-columns: 1fr;
         }
@@ -2139,11 +2257,11 @@
         </div>
       </section>
 
-      <!-- === SLIDE 07: DATA / EVIDENCE === -->
+      <!-- === SLIDE 07: DESCRIPTIVE STATISTICS === -->
       <section
-        class="slide ink is-after"
+        class="slide paper is-after"
         id="slide-07"
-        data-tone="ink"
+        data-tone="paper"
         aria-labelledby="slide-07-title"
       >
         <div class="slide-content">
@@ -2152,12 +2270,12 @@
               <div class="rail-top reveal delay-1">
                 <span class="rail-index">07</span>
                 <div>
-                  <div class="rail-label">Establish Argument</div>
-                  <div class="rail-series">Data / Evidence</div>
+                  <div class="rail-label">Data / Evidence</div>
+                  <div class="rail-series">Descriptive Statistics</div>
                 </div>
               </div>
               <div class="rail-bottom reveal delay-2">
-                <div class="rail-series">Results Snapshot</div>
+                <div class="rail-series">Distribution Overview</div>
               </div>
             </aside>
 
@@ -2165,64 +2283,139 @@
               <header class="slide-header">
                 <p class="eyebrow reveal delay-1">Data / Evidence</p>
                 <h2 class="slide-title reveal delay-2" id="slide-07-title">
-                  The bivariate sleep-GPA relationship was essentially flat.
+                  The dataset showed a broad enough range to test sleep against
+                  GPA credibly.
                 </h2>
               </header>
 
-              <div class="layout-wide">
-                <div class="metric-grid reveal delay-3">
-                  <div class="metric-card card-surface">
-                    <em>Sample</em>
-                    <strong>2,000</strong>
-                    <span>Student records analyzed.</span>
+              <div class="stats-layout">
+                <!-- Slide 07 left column: exact descriptive statistics table
+                     from the user's research output. -->
+                <div class="data-table-card card-surface reveal delay-3">
+                  <span class="mini-label">Main Variables</span>
+                  <div class="stats-table-wrap">
+                    <table class="stats-table">
+                      <thead>
+                        <tr>
+                          <th>Variable</th>
+                          <th>M</th>
+                          <th>SD</th>
+                          <th>Min</th>
+                          <th>Max</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Study</td>
+                          <td>7.48</td>
+                          <td>1.42</td>
+                          <td>5.00</td>
+                          <td>10.00</td>
+                        </tr>
+                        <tr>
+                          <td>Extracurricular</td>
+                          <td>1.99</td>
+                          <td>1.16</td>
+                          <td>0.00</td>
+                          <td>4.00</td>
+                        </tr>
+                        <tr>
+                          <td>Sleep</td>
+                          <td>7.50</td>
+                          <td>1.46</td>
+                          <td>5.00</td>
+                          <td>10.00</td>
+                        </tr>
+                        <tr>
+                          <td>Social</td>
+                          <td>2.70</td>
+                          <td>1.69</td>
+                          <td>0.00</td>
+                          <td>6.00</td>
+                        </tr>
+                        <tr>
+                          <td>Physical Activity</td>
+                          <td>4.33</td>
+                          <td>2.51</td>
+                          <td>0.00</td>
+                          <td>13.00</td>
+                        </tr>
+                        <tr>
+                          <td>GPA</td>
+                          <td>3.12</td>
+                          <td>0.30</td>
+                          <td>2.24</td>
+                          <td>4.00</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
-                  <div class="metric-card card-surface">
-                    <em>Mean Sleep</em>
-                    <strong>7.50h</strong>
-                    <span>Average nightly sleep duration.</span>
-                  </div>
-                  <div class="metric-card card-surface">
-                    <em>Mean GPA</em>
-                    <strong>3.12</strong>
-                    <span>Average academic performance in the file.</span>
-                  </div>
-                  <div class="metric-card card-surface">
-                    <em>Sleep Range</em>
-                    <strong>5-10h</strong>
-                    <span>Broad enough for comparison, but still null.</span>
-                  </div>
+                  <p class="chart-caption">
+                    Social time appears here descriptively, but it was removed
+                    from regression because the time-use variables summed to 24
+                    hours.
+                  </p>
                 </div>
 
-                <div class="layout-split">
-                  <div class="chart-panel card-surface reveal delay-4">
-                    <span class="mini-label">Sleep vs GPA</span>
-                    <div class="flat-chart" aria-hidden="true">
-                      <div class="trend-line-flat"></div>
-                      <span class="trend-point" style="left: 20%; top: 46%;"></span>
-                      <span class="trend-point" style="left: 34%; top: 47%;"></span>
-                      <span class="trend-point" style="left: 49%; top: 46%;"></span>
-                      <span class="trend-point" style="left: 66%; top: 48%;"></span>
-                      <span class="trend-point" style="left: 82%; top: 47%;"></span>
+                <!-- Slide 07 right column: histogram recreation plus short read. -->
+                <div class="distribution-panel reveal delay-4">
+                  <div class="visual-card card-surface">
+                    <span class="mini-label">Sleep Distribution</span>
+                    <div class="chart-stage" aria-hidden="true">
+                      <svg viewBox="0 0 760 420" preserveAspectRatio="none">
+                        <g stroke="#111724" stroke-opacity=".1" stroke-width="1">
+                          <line x1="84" y1="330" x2="700" y2="330"></line>
+                          <line x1="84" y1="270" x2="700" y2="270"></line>
+                          <line x1="84" y1="210" x2="700" y2="210"></line>
+                          <line x1="84" y1="150" x2="700" y2="150"></line>
+                          <line x1="84" y1="90" x2="700" y2="90"></line>
+                        </g>
+                        <line x1="84" y1="330" x2="84" y2="60" stroke="#111724" stroke-opacity=".24" stroke-width="2"></line>
+                        <line x1="84" y1="330" x2="700" y2="330" stroke="#111724" stroke-opacity=".24" stroke-width="2"></line>
+                        <g fill="#2f7bb4" fill-opacity=".96" stroke="#ffffff" stroke-opacity=".78" stroke-width="2">
+                          <rect x="104" y="120" width="40" height="210" rx="6"></rect>
+                          <rect x="152" y="82" width="40" height="248" rx="6"></rect>
+                          <rect x="200" y="165" width="40" height="165" rx="6"></rect>
+                          <rect x="248" y="125" width="40" height="205" rx="6"></rect>
+                          <rect x="296" y="158" width="40" height="172" rx="6"></rect>
+                          <rect x="344" y="123" width="40" height="207" rx="6"></rect>
+                          <rect x="392" y="139" width="40" height="191" rx="6"></rect>
+                          <rect x="440" y="80" width="40" height="250" rx="6"></rect>
+                          <rect x="488" y="180" width="40" height="150" rx="6"></rect>
+                          <rect x="536" y="124" width="40" height="206" rx="6"></rect>
+                          <rect x="584" y="102" width="40" height="228" rx="6"></rect>
+                        </g>
+                        <g font-family="IBM Plex Mono, monospace" font-size="18" fill="#5f6673">
+                          <text x="60" y="334">0</text>
+                          <text x="50" y="274">50</text>
+                          <text x="40" y="214">100</text>
+                          <text x="40" y="154">150</text>
+                          <text x="40" y="94">200</text>
+                          <text x="104" y="360">5</text>
+                          <text x="224" y="360">6</text>
+                          <text x="344" y="360">7</text>
+                          <text x="464" y="360">8</text>
+                          <text x="584" y="360">9</text>
+                          <text x="684" y="360">10</text>
+                        </g>
+                        <text x="392" y="394" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="18" fill="#5f6673">Sleep hours per day</text>
+                        <text x="22" y="210" text-anchor="middle" transform="rotate(-90 22 210)" font-family="IBM Plex Mono, monospace" font-size="18" fill="#5f6673">Frequency</text>
+                      </svg>
                     </div>
-                    <p class="chart-caption">Pearson r = -0.004 | p = .848</p>
+                    <p class="chart-caption">
+                      Sleep hours were distributed across the 5-10 hour range
+                      rather than clustering in one narrow segment.
+                    </p>
                   </div>
 
-                  <div class="results-strip reveal delay-5">
-                    <div class="quote-stat card-surface">
-                      <em>Grouped Means</em>
-                      <strong>F = 0.94</strong>
-                      <span>Five sleep bands still produced no significant GPA difference.</span>
-                    </div>
-                    <div class="quote-stat card-surface">
-                      <em>Threshold Check</em>
-                      <strong>p = .918</strong>
-                      <span>Under 8 hours and 8+ hours produced nearly identical mean GPAs.</span>
-                    </div>
-                    <div class="quote-stat card-surface">
-                      <em>Interpretation</em>
-                      <strong>Near Zero</strong>
-                      <span>Sleep duration alone explained almost none of the GPA variation.</span>
-                    </div>
+                  <div class="data-note card-surface">
+                    <span class="mini-label">Why This Matters</span>
+                    <p class="body-copy">
+                      Study time averaged 7.48 hours, sleep averaged 7.50
+                      hours, and GPA averaged 3.12. Those ranges make the later
+                      null result more meaningful because the file was not
+                      restricted to one tiny slice of student behavior.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -2231,7 +2424,296 @@
         </div>
       </section>
 
-      <!-- === SLIDE 08: ANALYSIS === -->
+      <!-- === SLIDE 08: SCATTERPLOT RESULT === -->
+      <section
+        class="slide paper is-after"
+        id="slide-07a"
+        data-tone="paper"
+        aria-labelledby="slide-07a-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">08</span>
+                <div>
+                  <div class="rail-label">Data / Evidence</div>
+                  <div class="rail-series">Correlation Plot</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">Bivariate Result</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Bivariate Result</p>
+                <h2 class="slide-title reveal delay-2" id="slide-07a-title">
+                  The original scatterplot was visually flat, matching the
+                  near-zero correlation.
+                </h2>
+              </header>
+
+              <div class="layout-split">
+                <div class="visual-card card-surface reveal delay-3">
+                  <span class="mini-label">Sleep vs GPA Scatterplot</span>
+                  <div class="chart-stage wide" aria-hidden="true">
+                    <svg viewBox="0 0 760 420" preserveAspectRatio="none">
+                      <g stroke="#111724" stroke-opacity=".08" stroke-width="1">
+                        <line x1="84" y1="340" x2="700" y2="340"></line>
+                        <line x1="84" y1="300" x2="700" y2="300"></line>
+                        <line x1="84" y1="260" x2="700" y2="260"></line>
+                        <line x1="84" y1="220" x2="700" y2="220"></line>
+                        <line x1="84" y1="180" x2="700" y2="180"></line>
+                        <line x1="84" y1="140" x2="700" y2="140"></line>
+                        <line x1="84" y1="100" x2="700" y2="100"></line>
+                        <line x1="84" y1="60" x2="700" y2="60"></line>
+                      </g>
+                      <line x1="84" y1="340" x2="84" y2="42" stroke="#111724" stroke-opacity=".24" stroke-width="2"></line>
+                      <line x1="84" y1="340" x2="700" y2="340" stroke="#111724" stroke-opacity=".24" stroke-width="2"></line>
+                      <g fill="#8bc0ea" fill-opacity=".24" stroke="#8bc0ea" stroke-opacity=".58" stroke-width="2">
+                        <circle cx="90" cy="112" r="4"></circle>
+                        <circle cx="90" cy="148" r="4"></circle>
+                        <circle cx="90" cy="176" r="4"></circle>
+                        <circle cx="90" cy="205" r="4"></circle>
+                        <circle cx="90" cy="238" r="4"></circle>
+                        <circle cx="90" cy="276" r="4"></circle>
+                        <circle cx="145" cy="96" r="4"></circle>
+                        <circle cx="145" cy="132" r="4"></circle>
+                        <circle cx="145" cy="168" r="4"></circle>
+                        <circle cx="145" cy="198" r="4"></circle>
+                        <circle cx="145" cy="232" r="4"></circle>
+                        <circle cx="145" cy="268" r="4"></circle>
+                        <circle cx="200" cy="108" r="4"></circle>
+                        <circle cx="200" cy="152" r="4"></circle>
+                        <circle cx="200" cy="186" r="4"></circle>
+                        <circle cx="200" cy="214" r="4"></circle>
+                        <circle cx="200" cy="248" r="4"></circle>
+                        <circle cx="200" cy="286" r="4"></circle>
+                        <circle cx="255" cy="88" r="4"></circle>
+                        <circle cx="255" cy="138" r="4"></circle>
+                        <circle cx="255" cy="172" r="4"></circle>
+                        <circle cx="255" cy="206" r="4"></circle>
+                        <circle cx="255" cy="244" r="4"></circle>
+                        <circle cx="255" cy="298" r="4"></circle>
+                        <circle cx="310" cy="102" r="4"></circle>
+                        <circle cx="310" cy="146" r="4"></circle>
+                        <circle cx="310" cy="182" r="4"></circle>
+                        <circle cx="310" cy="216" r="4"></circle>
+                        <circle cx="310" cy="258" r="4"></circle>
+                        <circle cx="310" cy="290" r="4"></circle>
+                        <circle cx="365" cy="84" r="4"></circle>
+                        <circle cx="365" cy="126" r="4"></circle>
+                        <circle cx="365" cy="164" r="4"></circle>
+                        <circle cx="365" cy="202" r="4"></circle>
+                        <circle cx="365" cy="242" r="4"></circle>
+                        <circle cx="365" cy="280" r="4"></circle>
+                        <circle cx="420" cy="98" r="4"></circle>
+                        <circle cx="420" cy="140" r="4"></circle>
+                        <circle cx="420" cy="174" r="4"></circle>
+                        <circle cx="420" cy="210" r="4"></circle>
+                        <circle cx="420" cy="246" r="4"></circle>
+                        <circle cx="420" cy="284" r="4"></circle>
+                        <circle cx="475" cy="76" r="4"></circle>
+                        <circle cx="475" cy="120" r="4"></circle>
+                        <circle cx="475" cy="160" r="4"></circle>
+                        <circle cx="475" cy="198" r="4"></circle>
+                        <circle cx="475" cy="236" r="4"></circle>
+                        <circle cx="475" cy="272" r="4"></circle>
+                        <circle cx="530" cy="92" r="4"></circle>
+                        <circle cx="530" cy="136" r="4"></circle>
+                        <circle cx="530" cy="170" r="4"></circle>
+                        <circle cx="530" cy="208" r="4"></circle>
+                        <circle cx="530" cy="250" r="4"></circle>
+                        <circle cx="530" cy="288" r="4"></circle>
+                        <circle cx="585" cy="86" r="4"></circle>
+                        <circle cx="585" cy="130" r="4"></circle>
+                        <circle cx="585" cy="166" r="4"></circle>
+                        <circle cx="585" cy="204" r="4"></circle>
+                        <circle cx="585" cy="240" r="4"></circle>
+                        <circle cx="585" cy="278" r="4"></circle>
+                        <circle cx="640" cy="104" r="4"></circle>
+                        <circle cx="640" cy="144" r="4"></circle>
+                        <circle cx="640" cy="178" r="4"></circle>
+                        <circle cx="640" cy="214" r="4"></circle>
+                        <circle cx="640" cy="252" r="4"></circle>
+                        <circle cx="640" cy="294" r="4"></circle>
+                        <circle cx="695" cy="90" r="4"></circle>
+                        <circle cx="695" cy="134" r="4"></circle>
+                        <circle cx="695" cy="168" r="4"></circle>
+                        <circle cx="695" cy="206" r="4"></circle>
+                        <circle cx="695" cy="244" r="4"></circle>
+                        <circle cx="695" cy="282" r="4"></circle>
+                      </g>
+                      <line x1="88" y1="182" x2="700" y2="184" stroke="#2f7bb4" stroke-width="4" stroke-linecap="round"></line>
+                      <g font-family="IBM Plex Mono, monospace" font-size="18" fill="#5f6673">
+                        <text x="42" y="344">2.25</text>
+                        <text x="42" y="304">2.50</text>
+                        <text x="42" y="264">2.75</text>
+                        <text x="52" y="224">3.00</text>
+                        <text x="52" y="184">3.25</text>
+                        <text x="52" y="144">3.50</text>
+                        <text x="52" y="104">3.75</text>
+                        <text x="52" y="64">4.00</text>
+                        <text x="86" y="368">5</text>
+                        <text x="210" y="368">6</text>
+                        <text x="334" y="368">7</text>
+                        <text x="458" y="368">8</text>
+                        <text x="582" y="368">9</text>
+                        <text x="692" y="368">10</text>
+                      </g>
+                      <rect x="520" y="292" width="168" height="42" rx="10" fill="#ffffff" fill-opacity=".88" stroke="#111724" stroke-opacity=".28"></rect>
+                      <text x="604" y="318" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="18" fill="#111724">r = -0.004, p = .848</text>
+                      <text x="392" y="400" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="18" fill="#5f6673">Sleep hours per day</text>
+                      <text x="22" y="206" text-anchor="middle" transform="rotate(-90 22 206)" font-family="IBM Plex Mono, monospace" font-size="18" fill="#5f6673">GPA</text>
+                    </svg>
+                  </div>
+                  <p class="chart-caption">
+                    Original bivariate result: the fitted line was almost
+                    perfectly horizontal and the correlation was not
+                    significant.
+                  </p>
+                </div>
+
+                <div class="stack reveal delay-4">
+                  <div class="metric-card card-surface">
+                    <em>Correlation</em>
+                    <strong>r = -0.004</strong>
+                    <span>The direction was effectively zero, not a meaningful negative trend.</span>
+                  </div>
+                  <div class="metric-card card-surface">
+                    <em>Significance</em>
+                    <strong>p = .848</strong>
+                    <span>The probability value gave no reason to reject the null linear relationship.</span>
+                  </div>
+                  <div class="metric-card card-surface">
+                    <em>Visual Read</em>
+                    <strong>Flat Cloud</strong>
+                    <span>Higher and lower GPAs appeared across the entire 5-10 hour sleep range.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 09: GROUPED MEANS === -->
+      <section
+        class="slide paper is-after"
+        id="slide-07b"
+        data-tone="paper"
+        aria-labelledby="slide-07b-title"
+      >
+        <div class="slide-content">
+          <div class="frame">
+            <aside class="rail">
+              <div class="rail-top reveal delay-1">
+                <span class="rail-index">09</span>
+                <div>
+                  <div class="rail-label">Data / Evidence</div>
+                  <div class="rail-series">Grouped Means</div>
+                </div>
+              </div>
+              <div class="rail-bottom reveal delay-2">
+                <div class="rail-series">ANOVA Result</div>
+              </div>
+            </aside>
+
+            <div class="content-stack">
+              <header class="slide-header">
+                <p class="eyebrow reveal delay-1">Band Comparison</p>
+                <h2 class="slide-title reveal delay-2" id="slide-07b-title">
+                  Grouping students by sleep band still produced nearly
+                  identical mean GPAs.
+                </h2>
+              </header>
+
+              <div class="layout-split">
+                <div class="visual-card card-surface reveal delay-3">
+                  <span class="mini-label">Mean GPA by Sleep Band</span>
+                  <div class="chart-stage wide" aria-hidden="true">
+                    <svg viewBox="0 0 760 420" preserveAspectRatio="none">
+                      <g stroke="#111724" stroke-opacity=".1" stroke-width="1">
+                        <line x1="88" y1="340" x2="704" y2="340"></line>
+                        <line x1="88" y1="247" x2="704" y2="247"></line>
+                        <line x1="88" y1="201" x2="704" y2="201"></line>
+                        <line x1="88" y1="154" x2="704" y2="154"></line>
+                        <line x1="88" y1="108" x2="704" y2="108"></line>
+                      </g>
+                      <line x1="88" y1="340" x2="88" y2="50" stroke="#111724" stroke-opacity=".24" stroke-width="2"></line>
+                      <line x1="88" y1="340" x2="704" y2="340" stroke="#111724" stroke-opacity=".24" stroke-width="2"></line>
+                      <g fill="#2f7bb4" fill-opacity=".98">
+                        <rect x="130" y="144.6" width="84" height="195.4" rx="8"></rect>
+                        <rect x="255" y="146.5" width="84" height="193.5" rx="8"></rect>
+                        <rect x="380" y="128.9" width="84" height="211.1" rx="8"></rect>
+                        <rect x="505" y="125.2" width="84" height="214.8" rx="8"></rect>
+                        <rect x="630" y="156.7" width="84" height="183.3" rx="8"></rect>
+                      </g>
+                      <g stroke="#111724" stroke-width="4" stroke-linecap="round">
+                        <line x1="172" y1="118.7" x2="172" y2="170.5"></line>
+                        <line x1="297" y1="119.6" x2="297" y2="173.4"></line>
+                        <line x1="422" y1="101.1" x2="422" y2="156.7"></line>
+                        <line x1="547" y1="97.4" x2="547" y2="153"></line>
+                        <line x1="672" y1="128.9" x2="672" y2="184.5"></line>
+                        <line x1="156" y1="118.7" x2="188" y2="118.7"></line>
+                        <line x1="281" y1="119.6" x2="313" y2="119.6"></line>
+                        <line x1="406" y1="101.1" x2="438" y2="101.1"></line>
+                        <line x1="531" y1="97.4" x2="563" y2="97.4"></line>
+                        <line x1="656" y1="128.9" x2="688" y2="128.9"></line>
+                        <line x1="156" y1="170.5" x2="188" y2="170.5"></line>
+                        <line x1="281" y1="173.4" x2="313" y2="173.4"></line>
+                        <line x1="406" y1="156.7" x2="438" y2="156.7"></line>
+                        <line x1="531" y1="153" x2="563" y2="153"></line>
+                        <line x1="656" y1="184.5" x2="688" y2="184.5"></line>
+                      </g>
+                      <g font-family="IBM Plex Mono, monospace" font-size="18" fill="#5f6673">
+                        <text x="42" y="344">2.90</text>
+                        <text x="42" y="251">3.00</text>
+                        <text x="42" y="205">3.05</text>
+                        <text x="42" y="158">3.10</text>
+                        <text x="42" y="112">3.15</text>
+                        <text x="172" y="372" text-anchor="middle">&lt;=5.9</text>
+                        <text x="297" y="372" text-anchor="middle">6.0-6.9</text>
+                        <text x="422" y="372" text-anchor="middle">7.0-7.9</text>
+                        <text x="547" y="372" text-anchor="middle">8.0-8.9</text>
+                        <text x="672" y="372" text-anchor="middle">&gt;=9.0</text>
+                      </g>
+                      <text x="396" y="402" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="18" fill="#5f6673">Sleep band (hours per day)</text>
+                      <text x="22" y="205" text-anchor="middle" transform="rotate(-90 22 205)" font-family="IBM Plex Mono, monospace" font-size="18" fill="#5f6673">Mean GPA</text>
+                    </svg>
+                  </div>
+                  <p class="chart-caption">
+                    Mean GPA stayed tightly clustered from about 3.10 to 3.13
+                    across all five sleep bands, with overlapping error bars.
+                  </p>
+                </div>
+
+                <div class="stack reveal delay-4">
+                  <div class="metric-card card-surface">
+                    <em>ANOVA</em>
+                    <strong>F = 0.94</strong>
+                    <span>The between-group variation was too small to support a meaningful band effect.</span>
+                  </div>
+                  <div class="metric-card card-surface">
+                    <em>Significance</em>
+                    <strong>p = .918</strong>
+                    <span>The sleep-band comparison remained clearly non-significant.</span>
+                  </div>
+                  <div class="metric-card card-surface">
+                    <em>Band Spread</em>
+                    <strong>3.10-3.13</strong>
+                    <span>All five means sat within roughly three hundredths of one GPA point.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- === SLIDE 10: ANALYSIS === -->
       <section
         class="slide ink is-after"
         id="slide-08"
@@ -2242,7 +2724,7 @@
           <div class="frame">
             <aside class="rail">
               <div class="rail-top reveal delay-1">
-                <span class="rail-index">08</span>
+                <span class="rail-index">10</span>
                 <div>
                   <div class="rail-label">Establish Argument</div>
                   <div class="rail-series">Analysis</div>
@@ -2325,7 +2807,7 @@
         <!-- Speaker note: This is where you explain the 24-hour tradeoff idea clearly. -->
       </section>
 
-      <!-- === SLIDE 09: CONCLUSION === -->
+      <!-- === SLIDE 11: CONCLUSION === -->
       <section
         class="slide paper is-after"
         id="slide-09"
@@ -2336,7 +2818,7 @@
           <div class="frame">
             <aside class="rail">
               <div class="rail-top reveal delay-1">
-                <span class="rail-index">09</span>
+                <span class="rail-index">11</span>
                 <div>
                   <div class="rail-label">Establish Argument</div>
                   <div class="rail-series">Conclusion</div>
@@ -2402,7 +2884,7 @@
         </div>
       </section>
 
-      <!-- === SLIDE 10: IMPLICATIONS === -->
+      <!-- === SLIDE 12: IMPLICATIONS === -->
       <section
         class="slide paper is-after"
         id="slide-10"
@@ -2413,7 +2895,7 @@
           <div class="frame">
             <aside class="rail">
               <div class="rail-top reveal delay-1">
-                <span class="rail-index">10</span>
+                <span class="rail-index">12</span>
                 <div>
                   <div class="rail-label">Establish Argument</div>
                   <div class="rail-series">Implications</div>
@@ -2470,7 +2952,7 @@
         </div>
       </section>
 
-      <!-- === SLIDE 11: LIMITATIONS === -->
+      <!-- === SLIDE 13: LIMITATIONS === -->
       <section
         class="slide paper is-after"
         id="slide-11"
@@ -2481,7 +2963,7 @@
           <div class="frame">
             <aside class="rail">
               <div class="rail-top reveal delay-1">
-                <span class="rail-index">11</span>
+                <span class="rail-index">13</span>
                 <div>
                   <div class="rail-label">Establish Argument</div>
                   <div class="rail-series">Limitations</div>
@@ -2528,7 +3010,7 @@
         </div>
       </section>
 
-      <!-- === SLIDE 12: FUTURE RESEARCH === -->
+      <!-- === SLIDE 14: FUTURE RESEARCH === -->
       <section
         class="slide ink is-after"
         id="slide-12"
@@ -2539,7 +3021,7 @@
           <div class="frame">
             <aside class="rail">
               <div class="rail-top reveal delay-1">
-                <span class="rail-index">12</span>
+                <span class="rail-index">14</span>
                 <div>
                   <div class="rail-label">Establish Argument</div>
                   <div class="rail-series">Future Research</div>
@@ -2611,7 +3093,7 @@
         </div>
       </section>
 
-      <!-- === SLIDE 13: REFLECTION === -->
+      <!-- === SLIDE 15: REFLECTION === -->
       <section
         class="slide ink is-after"
         id="slide-13"
@@ -2622,7 +3104,7 @@
           <div class="frame">
             <aside class="rail">
               <div class="rail-top reveal delay-1">
-                <span class="rail-index">13</span>
+                <span class="rail-index">15</span>
                 <div>
                   <div class="rail-label">Reflect</div>
                   <div class="rail-series">Process and Growth</div>
