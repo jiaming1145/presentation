@@ -41,6 +41,8 @@
         --ease-slide: cubic-bezier(0.22, 1, 0.36, 1);
         --shadow-soft: 0 24px 80px rgba(10, 14, 22, 0.12);
         --shadow-deep: 0 28px 80px rgba(5, 10, 18, 0.36);
+        --stage-margin: clamp(0.75rem, 1.5vw, 1.35rem);
+        --stage-radius: clamp(1rem, 1.8vw, 1.6rem);
       }
 
       /* === RESET === */
@@ -257,6 +259,51 @@
         height: 100dvh;
         overflow: hidden;
         isolation: isolate;
+      }
+
+      /* === CENTERED PRESENTATION STAGE === */
+      @media (min-aspect-ratio: 4/3) {
+        :root {
+          --stage-width: min(
+            calc(100vw - (2 * var(--stage-margin))),
+            calc((100dvh - (2 * var(--stage-margin))) * 16 / 9)
+          );
+          --stage-height: min(
+            calc((100vw - (2 * var(--stage-margin))) * 9 / 16),
+            calc(100dvh - (2 * var(--stage-margin)))
+          );
+        }
+
+        .deck .slide {
+          display: grid;
+          place-items: center;
+        }
+
+        .deck .slide .slide-content {
+          flex: none;
+          width: var(--stage-width);
+          height: var(--stage-height);
+          max-width: 100%;
+          max-height: 100%;
+          margin: auto;
+          border-radius: var(--stage-radius);
+          overflow: hidden;
+          box-shadow:
+            0 36px 100px rgba(7, 10, 18, 0.22),
+            0 0 0 1px rgba(255, 255, 255, 0.04);
+          background: rgba(255, 255, 255, 0.01);
+        }
+
+        .slide.paper::before,
+        .slide.ink::before {
+          inset: auto;
+          top: 50%;
+          left: 50%;
+          width: var(--stage-width);
+          height: var(--stage-height);
+          transform: translate(-50%, -50%);
+          border-radius: var(--stage-radius);
+        }
       }
 
       .progress-bar {
