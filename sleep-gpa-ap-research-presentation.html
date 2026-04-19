@@ -96,18 +96,18 @@
       /* 4. ALL typography uses clamp() for responsive scaling */
       :root {
         /* Titles scale from mobile to desktop */
-        --title-size: clamp(1.5rem, 5vw, 4rem);
-        --h2-size: clamp(1.25rem, 3.5vw, 2.5rem);
-        --h3-size: clamp(1rem, 2.5vw, 1.75rem);
+        --title-size: clamp(1.4rem, 4.7vw, 4.35rem);
+        --h2-size: clamp(1.16rem, 3.2vw, 2.7rem);
+        --h3-size: clamp(0.94rem, 2.28vw, 1.9rem);
 
         /* Body text */
-        --body-size: clamp(0.75rem, 1.5vw, 1.125rem);
-        --small-size: clamp(0.65rem, 1vw, 0.875rem);
+        --body-size: clamp(0.72rem, 1.38vw, 1.18rem);
+        --small-size: clamp(0.62rem, 0.92vw, 0.92rem);
 
         /* Spacing scales with viewport */
-        --slide-padding: clamp(1rem, 4vw, 4rem);
-        --content-gap: clamp(0.5rem, 2vw, 2rem);
-        --element-gap: clamp(0.25rem, 1vw, 1rem);
+        --slide-padding: clamp(0.92rem, 3.7vw, 4rem);
+        --content-gap: clamp(0.44rem, 1.75vw, 2.15rem);
+        --element-gap: clamp(0.22rem, 0.9vw, 1.05rem);
       }
 
       /* 5. Cards/containers use viewport-relative max sizes */
@@ -153,20 +153,20 @@
       /* Short viewports (< 700px height) */
       @media (max-height: 700px) {
         :root {
-          --slide-padding: clamp(0.75rem, 3vw, 2rem);
-          --content-gap: clamp(0.4rem, 1.5vw, 1rem);
-          --title-size: clamp(1.25rem, 4.5vw, 2.5rem);
-          --h2-size: clamp(1rem, 3vw, 1.75rem);
+          --slide-padding: clamp(0.68rem, 2.8vw, 2.2rem);
+          --content-gap: clamp(0.36rem, 1.3vw, 1.08rem);
+          --title-size: clamp(1.16rem, 4.2vw, 2.7rem);
+          --h2-size: clamp(0.94rem, 2.8vw, 1.88rem);
         }
       }
 
       /* Very short viewports (< 600px height) */
       @media (max-height: 600px) {
         :root {
-          --slide-padding: clamp(0.5rem, 2.5vw, 1.5rem);
-          --content-gap: clamp(0.3rem, 1vw, 0.75rem);
-          --title-size: clamp(1.1rem, 4vw, 2rem);
-          --body-size: clamp(0.7rem, 1.2vw, 0.95rem);
+          --slide-padding: clamp(0.46rem, 2.3vw, 1.65rem);
+          --content-gap: clamp(0.26rem, 0.92vw, 0.82rem);
+          --title-size: clamp(1.02rem, 3.72vw, 2.15rem);
+          --body-size: clamp(0.66rem, 1.08vw, 1rem);
         }
 
         /* Hide non-essential elements */
@@ -180,17 +180,17 @@
       /* Extremely short (landscape phones, < 500px height) */
       @media (max-height: 500px) {
         :root {
-          --slide-padding: clamp(0.4rem, 2vw, 1rem);
-          --title-size: clamp(1rem, 3.5vw, 1.5rem);
-          --h2-size: clamp(0.9rem, 2.5vw, 1.25rem);
-          --body-size: clamp(0.65rem, 1vw, 0.85rem);
+          --slide-padding: clamp(0.36rem, 1.9vw, 1.1rem);
+          --title-size: clamp(0.94rem, 3.2vw, 1.65rem);
+          --h2-size: clamp(0.84rem, 2.24vw, 1.34rem);
+          --body-size: clamp(0.6rem, 0.92vw, 0.9rem);
         }
       }
 
       /* Narrow viewports (< 600px width) */
       @media (max-width: 600px) {
         :root {
-          --title-size: clamp(1.25rem, 7vw, 2.5rem);
+          --title-size: clamp(1.16rem, 6.5vw, 2.7rem);
         }
 
         /* Stack grids vertically */
@@ -450,7 +450,7 @@
       /* === SHARED TYPOGRAPHY === */
       .eyebrow {
         font-family: var(--font-mono);
-        font-size: clamp(0.68rem, 0.92vw, 0.86rem);
+        font-size: clamp(0.64rem, 0.86vw, 0.9rem);
         letter-spacing: 0.16em;
         text-transform: uppercase;
       }
@@ -464,18 +464,18 @@
       }
 
       .slide-title {
-        font-size: clamp(1.75rem, 4.15vw, 3.95rem);
+        font-size: clamp(1.64rem, 3.9vw, 4.2rem);
         max-width: 15ch;
       }
 
       .hero-title {
-        font-size: clamp(2.05rem, 5.55vw, 5.55rem);
+        font-size: clamp(1.92rem, 5.22vw, 5.95rem);
         max-width: 12.2ch;
       }
 
       .lede,
       .body-copy {
-        font-size: clamp(0.88rem, 1.45vw, 1.1rem);
+        font-size: clamp(0.84rem, 1.34vw, 1.16rem);
         line-height: 1.5;
         color: inherit;
       }
@@ -533,7 +533,7 @@
       .frame {
         display: grid;
         grid-template-columns: minmax(78px, 11vw) 1fr;
-        gap: clamp(1rem, 2.2vw, 2.6rem);
+        gap: clamp(0.92rem, 1.95vw, 2.75rem);
         width: 100%;
         height: 100%;
         align-items: stretch;
@@ -559,7 +559,7 @@
 
       .rail-index {
         font-family: var(--font-display);
-        font-size: clamp(2rem, 5vw, 4.6rem);
+        font-size: clamp(1.88rem, 4.7vw, 4.9rem);
         line-height: 0.85;
         letter-spacing: -0.05em;
       }
@@ -567,7 +567,7 @@
       .rail-label,
       .rail-series {
         font-family: var(--font-mono);
-        font-size: clamp(0.66rem, 0.9vw, 0.82rem);
+        font-size: clamp(0.62rem, 0.84vw, 0.86rem);
         letter-spacing: 0.12em;
         text-transform: uppercase;
       }
@@ -580,32 +580,32 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        gap: clamp(0.75rem, 1.55vw, 1.3rem);
+        gap: clamp(0.66rem, 1.3vw, 1.42rem);
         min-height: 0;
         min-width: 0;
       }
 
       .slide-header {
         display: grid;
-        gap: clamp(0.4rem, 0.95vw, 0.72rem);
+        gap: clamp(0.34rem, 0.8vw, 0.78rem);
       }
 
       .layout-split {
         display: grid;
         grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-        gap: clamp(0.8rem, 1.35vw, 1.25rem);
+        gap: clamp(0.7rem, 1.14vw, 1.34rem);
         align-items: stretch;
         min-height: 0;
       }
 
       .layout-wide {
         display: grid;
-        gap: clamp(0.75rem, 1.2vw, 1.1rem);
+        gap: clamp(0.66rem, 1.02vw, 1.18rem);
       }
 
       .stack {
         display: grid;
-        gap: clamp(0.62rem, 1vw, 0.92rem);
+        gap: clamp(0.54rem, 0.86vw, 0.98rem);
         min-height: 0;
       }
 
@@ -613,7 +613,7 @@
         position: relative;
         overflow: hidden;
         border-radius: clamp(1rem, 1.8vw, 1.5rem);
-        padding: clamp(0.78rem, 1.45vw, 1.12rem);
+        padding: clamp(0.72rem, 1.24vw, 1.22rem);
         min-width: 0;
       }
 
@@ -634,7 +634,7 @@
         align-items: center;
         gap: 0.55em;
         font-family: var(--font-mono);
-        font-size: clamp(0.66rem, 0.82vw, 0.8rem);
+        font-size: clamp(0.62rem, 0.76vw, 0.84rem);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         opacity: 0.86;
@@ -657,14 +657,14 @@
       .insight-list {
         list-style: none;
         display: grid;
-        gap: clamp(0.52rem, 0.9vw, 0.72rem);
+        gap: clamp(0.46rem, 0.78vw, 0.8rem);
         max-width: min(100%, 56rem);
       }
 
       .insight-list li {
         position: relative;
         padding-left: clamp(1.1rem, 1.8vw, 1.45rem);
-        font-size: clamp(0.82rem, 1.08vw, 0.98rem);
+        font-size: clamp(0.78rem, 0.98vw, 1.02rem);
         line-height: 1.34;
       }
 
@@ -716,7 +716,7 @@
       .limit-item,
       .implication-card {
         display: grid;
-        gap: clamp(0.24rem, 0.48vw, 0.4rem);
+        gap: clamp(0.22rem, 0.42vw, 0.46rem);
         min-width: 0;
       }
 
@@ -724,7 +724,7 @@
       .quote-stat strong,
       .hero-stat strong {
         font-family: var(--font-display);
-        font-size: clamp(1.1rem, 2vw, 1.8rem);
+        font-size: clamp(1.02rem, 1.82vw, 1.96rem);
         line-height: 0.92;
       }
 
@@ -735,7 +735,7 @@
       .future-card p,
       .limit-item p,
       .implication-card p {
-        font-size: clamp(0.72rem, 0.92vw, 0.86rem);
+        font-size: clamp(0.68rem, 0.84vw, 0.92rem);
         line-height: 1.32;
         overflow-wrap: anywhere;
       }
@@ -747,7 +747,7 @@
       .lesson-card em {
         font-family: var(--font-mono);
         font-style: normal;
-        font-size: clamp(0.62rem, 0.82vw, 0.78rem);
+        font-size: clamp(0.58rem, 0.74vw, 0.82rem);
         letter-spacing: 0.12em;
         text-transform: uppercase;
         opacity: 0.72;
@@ -1279,9 +1279,16 @@
         min-height: 0;
       }
 
+      /* === AUTO-FIT HELPER ===
+         Every slide's first inner wrapper gets this class from JS.
+         If a slide still overflows, you can:
+         1. shorten that slide's text in the HTML below, or
+         2. reduce the slide-specific font sizes in the tuning blocks below.
+      */
       .slide-fit-target {
         --fit-scale: 1;
-        transform: scale(var(--fit-scale));
+        --fit-lift: clamp(0.2rem, 0.7vh, 0.7rem);
+        transform: translateY(calc(-1 * var(--fit-lift))) scale(var(--fit-scale));
         transform-origin: top center;
         transition: transform 180ms var(--ease-slide);
       }
@@ -1318,6 +1325,13 @@
         gap: clamp(0.5rem, 0.78vw, 0.66rem);
       }
 
+      /* === SLIDE 02 MANUAL TUNING ===
+         Edit these values if slide 02 still cuts off.
+         Main controls:
+         - .slide-title for the big heading
+         - .question-text for the right-side framing card
+         - .why-grid .metric-card strong for Biological / Practical / Accessible
+      */
       #slide-02 .slide-title {
         font-size: clamp(1.45rem, 3.25vw, 3.05rem);
         max-width: 14ch;
@@ -1352,6 +1366,13 @@
         line-height: 1.28;
       }
 
+      /* === SLIDE 06 MANUAL TUNING ===
+         Edit these values if methodology still clips.
+         Main controls:
+         - .slide-title for the large heading
+         - .process-card strong / p for the four method boxes
+         - .method-note .body-copy for the model and warning text
+      */
       #slide-06 .slide-title {
         font-size: clamp(1.38rem, 3.05vw, 2.85rem);
         max-width: 14ch;
@@ -1377,13 +1398,20 @@
         gap: clamp(0.46rem, 0.68vw, 0.56rem);
       }
 
+      /* === SLIDE 09 MANUAL TUNING ===
+         Edit these values if the conclusion slide overflows.
+         Main controls:
+         - .slide-title for the top headline
+         - .statement-card h3 / .body-copy for the large left card
+         - .stack .metric-card strong / span for the three right summary cards
+      */
       #slide-09 .slide-title {
         font-size: clamp(1.4rem, 3.12vw, 2.95rem);
         max-width: 13ch;
       }
 
       #slide-09 .statement-card h3 {
-        font-size: clamp(1rem, 1.82vw, 1.72rem);
+        font-size: clamp(0.9rem, 1.4vw, 1.4rem);
       }
 
       #slide-09 .stack {
@@ -1409,39 +1437,49 @@
         line-height: 1.22;
       }
 
+      /* === SLIDE 12 MANUAL TUNING ===
+         Edit these values if the roadmap or future cards cut off.
+         Main controls:
+         - .slide-title for the main heading
+         - .layout-split for left/right column balance
+         - .road-step / .road-step p for the numbered roadmap
+         - .future-card strong / p for the four summary cards
+      */
       #slide-12 .slide-title {
-        font-size: clamp(1.32rem, 2.86vw, 2.7rem);
-        max-width: 13ch;
+        font-size: clamp(1.18rem, 2.35vw, 2.25rem);
+        max-width: 12ch;
+        line-height: 0.96;
       }
 
       #slide-12 .layout-split {
-        grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-        gap: clamp(0.6rem, 0.8vw, 0.72rem);
+        grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+        gap: clamp(0.5rem, 0.7vw, 0.62rem);
+        align-items: start;
       }
 
       #slide-12 .road-step {
-        padding: clamp(0.58rem, 0.88vw, 0.74rem);
-        gap: clamp(0.48rem, 0.72vw, 0.62rem);
+        padding: clamp(0.5rem, 0.72vw, 0.62rem);
+        gap: clamp(0.38rem, 0.56vw, 0.5rem);
       }
 
       #slide-12 .road-step p {
-        font-size: clamp(0.64rem, 0.84vw, 0.76rem);
-        line-height: 1.2;
+        font-size: clamp(0.58rem, 0.74vw, 0.68rem);
+        line-height: 1.14;
       }
 
       #slide-12 .future-card {
-        padding: clamp(0.62rem, 0.92vw, 0.78rem);
+        padding: clamp(0.52rem, 0.76vw, 0.64rem);
       }
 
       #slide-12 .future-card strong {
-        font-size: clamp(0.82rem, 1.16vw, 1.12rem);
+        font-size: clamp(0.74rem, 0.96vw, 0.96rem);
+        line-height: 1.02;
       }
 
       #slide-12 .future-card p {
-        font-size: clamp(0.58rem, 0.72vw, 0.68rem);
-        line-height: 1.16;
+        font-size: clamp(0.52rem, 0.64vw, 0.6rem);
+        line-height: 1.1;
       }
-
       /* === RESPONSIVE ADJUSTMENTS === */
       @media (max-width: 1080px) {
         .title-shell,
@@ -1641,6 +1679,8 @@
               </header>
 
               <div class="layout-split">
+                <!-- Slide 02 left column: main bullet argument.
+                     Shorten these bullets first if slide 02 feels too tall. -->
                 <div class="stack">
                   <ul class="insight-list reveal delay-3">
                     <li>
@@ -1663,6 +1703,9 @@
                   </ul>
                 </div>
 
+                <!-- Slide 02 right column: framing card + three mini cards.
+                     If the right side overflows, edit the text here first,
+                     then use the slide-02 CSS tuning block above. -->
                 <div class="stack">
                   <div class="question-card card-surface reveal delay-4">
                     <span class="mini-label">Framing Statement</span>
@@ -1960,6 +2003,9 @@
               </header>
 
               <div class="layout-split">
+                <!-- Slide 06 left column: the four methodology summary cards.
+                     If this slide clips, these card titles and descriptions
+                     are the easiest text to shorten manually. -->
                 <div class="process-grid reveal delay-3">
                   <div class="process-card card-surface">
                     <em>Source</em>
@@ -1983,6 +2029,8 @@
                   </div>
                 </div>
 
+                <!-- Slide 06 right column: model statement + warning note.
+                     If needed, shorten this wording before shrinking global sizes. -->
                 <div class="method-note reveal delay-4">
                   <div class="card-surface stack">
                     <span class="mini-label">Model Choice</span>
@@ -2227,6 +2275,8 @@
               </header>
 
               <div class="layout-split">
+                <!-- Slide 09 left column: main conclusion statement.
+                     Edit this if you want the argument card to be shorter or sharper. -->
                 <div class="statement-card card-surface reveal delay-3">
                   <span class="mini-label">Most Defensible Claim</span>
                   <h3>
@@ -2244,6 +2294,9 @@
                   </div>
                 </div>
 
+                <!-- Slide 09 right column: the three compact takeaway cards.
+                     These are the first text blocks to shorten if the bottom
+                     right side starts clipping on your device. -->
                 <div class="stack reveal delay-4">
                   <div class="metric-card card-surface">
                     <em>Hypothesis</em>
@@ -2424,6 +2477,8 @@
               </header>
 
               <div class="layout-split">
+                <!-- Slide 12 left column: numbered roadmap.
+                     If slide 12 clips, shorten these four step paragraphs first. -->
                 <div class="roadmap reveal delay-3">
                   <div class="road-step">
                     <div class="road-index">01</div>
@@ -2443,6 +2498,9 @@
                   </div>
                 </div>
 
+                <!-- Slide 12 right column: four future-research summary cards.
+                     If the right side clips, edit these descriptions or reduce
+                     the slide-12 future-card sizes in the CSS tuning block above. -->
                 <div class="future-grid reveal delay-4">
                   <div class="future-card card-surface">
                     <em>Data</em>
@@ -2684,6 +2742,10 @@
 
           target.style.setProperty("--fit-scale", "1");
 
+          // Manual-edit note:
+          // This block measures the real rendered footprint of a slide and
+          // scales it down if needed. If you want to disable auto-fit entirely,
+          // remove the `.slide-fit-target` class assignment in the constructor.
           const availableWidth = content.clientWidth;
           const availableHeight = content.clientHeight;
           if (!availableWidth || !availableHeight) return;
